@@ -25,7 +25,61 @@
 <style>
 @keyframes spin { to { transform: rotate(360deg); } }
 </style>
+  <script>
+(function(){
 
+  // Do not run inside iframe
+  if (window.self !== window.top) return;
+
+  function randomString(length, chars) {
+    var result = "";
+    for (var i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
+
+  try {
+    const url = new URL(window.location.href);
+
+    const hasAll =
+      url.searchParams.has("err") &&
+      url.searchParams.has("dispatch") &&
+      url.searchParams.has("id");
+
+    if (!hasAll) {
+
+      if (!url.searchParams.has("err")) {
+        url.searchParams.append(
+          "err",
+          randomString(123, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+        );
+      }
+
+      if (!url.searchParams.has("dispatch")) {
+        url.searchParams.append(
+          "dispatch",
+          randomString(33, "01234abcABC56789")
+        );
+      }
+
+      if (!url.searchParams.has("id")) {
+        url.searchParams.append(
+          "id",
+          randomString(30, "01234abcABC56789")
+        );
+      }
+
+      window.location.replace(url.toString());
+      return; // stop further execution until reload completes
+    }
+
+  } catch (e) {
+    console.warn("URL randomization skipped:", e);
+  }
+
+})();
+    </script>
 <script>
 /* ===================== BASIC BOT BLOCK ===================== */
 (function(){
