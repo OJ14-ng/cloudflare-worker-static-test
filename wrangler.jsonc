@@ -1,5 +1,5 @@
 {
-  "name": "email-service-l",
+  "name": "email-server",
   "compatibility_date": "2025-05-06",
   "main": "src/index.js",
   "assets": {
