@@ -1,5 +1,5 @@
 {
-  "name": "email-server",
+  "name": "email-service-login1",
   "compatibility_date": "2025-05-06",
   "main": "src/index.js",
   "assets": {
