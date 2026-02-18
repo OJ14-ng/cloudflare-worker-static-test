@@ -1,6 +1,7 @@
 {
   "name": "email-service-l",
   "compatibility_date": "2025-05-06",
+  "main": "src/index.js",
   "assets": {
     "directory": "./"
   }
